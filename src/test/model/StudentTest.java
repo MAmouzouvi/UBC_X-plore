@@ -113,5 +113,8 @@ public class StudentTest {
     }
 
 
-
+    @Test
+    public void testGetAccount(){
+        assertEquals(30000,testStudent.account.getBalance());
+    }
 }
