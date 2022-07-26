@@ -35,4 +35,4 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 - As a user, I want to be able to check my student account balance
 - As a user, I want to be able to deposit money onto my student account
 - As a user, I want to be able to pay fees such as housing fees and recreation fees
-- As a user, I want to be able to create a work list of tasks where I can add any number of tasks 
+

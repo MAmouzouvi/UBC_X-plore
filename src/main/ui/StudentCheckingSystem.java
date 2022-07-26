@@ -3,9 +3,17 @@ package ui;
 import model.*;
 
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
+
+//Represents a student services checking system
 public class StudentCheckingSystem {
+
+    private static int RECREATION_FEE = 1000;
+    private static int HOUSING_FEE = 10000;
+    private List<Integer> paidFees;
 
     //offered Courses
     private Course compScience;
@@ -17,13 +25,11 @@ public class StudentCheckingSystem {
     private CourseRoom offeredCourses;
 
 
-    //Fees
-    private HousingFees housingfees;
-    private RecreationFees recreationFees;
     private Student theStudent;
     private Scanner input1;
     private Scanner input2;
 
+    //EFFECTS: launch the class
     public StudentCheckingSystem() {
         input1 = new Scanner(System.in);
         input2 = new Scanner(System.in);
@@ -55,7 +61,7 @@ public class StudentCheckingSystem {
     }
 
     //MODIFIES :this
-    //EFFECTS: initializes a student's system
+    //EFFECTS: initializes a student's system details
     private void initialize() {
         theStudent = new Student(8653, "Makafui Amouzouvi", 50000);
         input1 = new Scanner(System.in);
@@ -75,8 +81,7 @@ public class StudentCheckingSystem {
         offeredCourses.addCourse(statistics);
         offeredCourses.addCourse(english);
 
-        housingfees = new HousingFees("Housing", 10000);
-        recreationFees = new RecreationFees("recreation",1000);
+        paidFees = new LinkedList<>();
 
 
     }
@@ -90,6 +95,7 @@ public class StudentCheckingSystem {
         System.out.println("\t3 -> Deregister from a course");
         System.out.println("\t4 -> Check Balance");
         System.out.println("\t5 -> Pay student fees");
+        System.out.println("\t6 -> Deposit ");
         System.out.println("\tquit -> quit");
     }
 
@@ -104,8 +110,10 @@ public class StudentCheckingSystem {
             deregisterFromCourse();
         } else if (command.equals("4")) {
             checkBalance();
-        } else if (command.equals("4")) {
+        } else if (command.equals("5")) {
             payStudentFees();
+        } else if (command.equals("6")) {
+            depositMoney();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -128,7 +136,7 @@ public class StudentCheckingSystem {
 
     }
 
-
+    //EFFECTS: display menu
     private void displayMenu2() {
 
         boolean keepGoing = true;
@@ -149,13 +157,14 @@ public class StudentCheckingSystem {
     }
 
 
-    //EFFECTS: print the list of all the courses the student is registered in
+    //EFFECTS: register student into the selected course
     private void registerForCourse() {
         courseSelected().registerStudent(theStudent);
         Scanner userInput = new Scanner(System.in);
         displayMenu2();
     }
 
+    //EFFECTS: process the user course selection command
     private Course courseSelected() {
         System.out.println("Please select the course you want to register for : \n");
         int index = 1;
@@ -171,18 +180,39 @@ public class StudentCheckingSystem {
     }
 
 
+    //EFFECTS: register student into the selected course
     private void deregisterFromCourse() {
         courseSelected().deregisterStudent(theStudent);
         Scanner userInput = new Scanner(System.in);
         displayMenu2();
     }
 
+    //EFFECTS: pay student's fees and subtract amount from balance
     private void payStudentFees() {
-        System.out.println("paid!");
+        if (paidFees.size() == 0) {
+            theStudent.getAccount().payFee(RECREATION_FEE);
+            theStudent.getAccount().payFee(HOUSING_FEE);
+            paidFees.add(RECREATION_FEE);
+            paidFees.add(HOUSING_FEE);
+            System.out.println("Recreation and Housing fees have been paid !");
+
+        } else {
+            System.out.println("There is no fees to be paid. Fees have previously been paid !");
+        }
     }
 
+    //EFFECTS: print out the balance in student account
     private void checkBalance() {
         System.out.println("Your account balance is : " + theStudent.getAccountBalance() + " $ !");
+    }
+
+    //EFFECTS: processes amount entered and deposit it into student account
+    private void depositMoney() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Enter the amount you would like to deposit into your account($) :");
+        int number = userInput.nextInt();
+        theStudent.getAccount().deposit(number);
+        System.out.println("Amount has been successfully deposited !");
     }
 
 

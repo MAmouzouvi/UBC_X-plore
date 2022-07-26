@@ -4,20 +4,21 @@ package model;
 import java.util.LinkedList;
 import java.util.List;
 
-//Represents a student with an id, a name and a list of courses they are registered in
+//Represents a student with an id, a name, a list of courses they are registered in
+//and a finances account
 public class Student {
     private int id;
     private String name;
     protected CourseRoom courses;
-    private CourseRoom workLists;
     protected Account account;
 
+   //EFFECTS: constructs a student with an id, a name, an initial balance
+   // and an empty list of registered courses
     public Student(int id, String name, int initialBalance) {
         this.id = id;
         this.name = name;
         this.courses = new CourseRoom("My Courses");
         this.account = new Account(initialBalance);
-        this.workLists = new CourseRoom("my CourseLists");
     }
 
     //MODIFIES: this
@@ -67,23 +68,27 @@ public class Student {
 
     }
 
-
+    //EFFECTS: return the name of the student (this)
     public String getStudentName() {
         return this.name;
     }
 
+    //EFFECTS: return the id of the student (this)
     public int getStudentId() {
         return this.id;
     }
 
-//    public Account getAccount() {
-    //       return this.account;
-//}
+    //EFFECTS: return the Account of the student (this)
+    public Account getAccount() {
+        return this.account;
+    }
 
+    //EFFECTS: return the list of courses the student is registered in
     public List<Course> getStudentCourses() {
         return this.courses.getCourseList();
     }
 
+    //EFFECTS: return the student (this)'s account balance
     public int getAccountBalance() {
         return this.account.balance;
     }

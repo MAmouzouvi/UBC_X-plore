@@ -1,7 +1,5 @@
 package model;
 
-
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class Course {
 
 
     //REQUIRES: cost > 0;
-    // EFFECTS: constructs a course with a name and a cost
+    // EFFECTS: constructs a course with a name and a cost, and an empty list of registered students
     public Course(String name, int cost) {
         this.name = name;
         this.cost = cost;

@@ -2,14 +2,12 @@ package model;
 
 // represents a student financial account. Every amount is in $.
 public class Account {
-    private float id;
     protected int balance;
 
     //REQUIRES: initialBalance >= 0
     //EFFECTS: constructs a student financial account with a given
     //initial balance.
     public Account(int initialBalance) {
-       // this.id = id;
         this.balance = initialBalance;
 
     }
@@ -17,7 +15,7 @@ public class Account {
     // REQUIRES: amount > 0
     // MODIFIES: this
     // EFFECTS: adds amount to balance of student
-    public void deposit(float amount) {
+    public void deposit(int amount) {
         this.balance += amount;
     }
 
@@ -27,7 +25,7 @@ public class Account {
     //            - subtracts amount from balance
     //            - returns true
     //          otherwise, returns false
-    public boolean payFee(float amount) {
+    public boolean payFee(int amount) {
         if (balance >= amount) {
             balance -= amount;
             return true;
