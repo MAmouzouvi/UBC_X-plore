@@ -33,37 +33,34 @@ public class StudentCheckingSystem {
     public StudentCheckingSystem() {
         input1 = new Scanner(System.in);
         input2 = new Scanner(System.in);
-
+        initialize();
         runSystem();
     }
 
     //MODIFIES: this
     //EFFECTS: analyses and works on user inputs
     private void runSystem() {
+        boolean running = true;
+        String userCommand;
 
-        boolean keepGoing = true;
-        String command;
 
-        initialize();
-
-        while (keepGoing) {
-            displayMenu();
-            command = input1.next();
-            command = command.toLowerCase();
-
-            if (command.equals("quit")) {
-                keepGoing = false;
+        while (running) {
+            userMenu();
+            userCommand = input1.next();
+            // userCommand = userCommand.toLowerCase();
+            if (userCommand.equals("quit")) {
+                running = false;
+                System.out.println("\nGoodbye " + theStudent.getStudentName() + " !");
             } else {
-                processCommand(command);
+                processCommand(userCommand);
             }
         }
-        System.out.println("\nGoodbye " + theStudent.getStudentName() + " !");
     }
 
     //MODIFIES :this
     //EFFECTS: initializes a student's system details
     private void initialize() {
-        theStudent = new Student(8653, "Makafui Amouzouvi", 50000);
+        theStudent = new Student(8653, "Makafui Amouzouvi", 0);
         input1 = new Scanner(System.in);
         input1.useDelimiter("\n");
 
@@ -88,7 +85,7 @@ public class StudentCheckingSystem {
 
     //MODIFIES: this
     //EFFECTS: show all menu options to user
-    private void displayMenu() {
+    private void userMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\t1 -> View my courses");
         System.out.println("\t2 -> Register for a course");
@@ -96,6 +93,9 @@ public class StudentCheckingSystem {
         System.out.println("\t4 -> Check Balance");
         System.out.println("\t5 -> Pay student fees");
         System.out.println("\t6 -> Deposit ");
+        System.out.println("\t7 -> View Maintenance Requests");
+        System.out.println("\t8 -> Submit a Maintenance request");
+        System.out.println("\t9 -> Delete a Maintenance request");
         System.out.println("\tquit -> quit");
     }
 
@@ -114,8 +114,14 @@ public class StudentCheckingSystem {
             payStudentFees();
         } else if (command.equals("6")) {
             depositMoney();
+        } else if (command.equals("7")) {
+            viewMaintenanceRequests();
+        } else if (command.equals("8")) {
+            submitRequest();
+        } else if (command.equals("9")) {
+            deleteRequest();
         } else {
-            System.out.println("Selection not valid...");
+            System.out.println("Selection is not valid...");
         }
     }
 
@@ -125,32 +131,35 @@ public class StudentCheckingSystem {
         if (theStudent.getStudentCourses().size() == 0) {
             System.out.println("You are not registered in any course yet!");
         } else {
+            System.out.println("Your courses are :");
             for (Course course : theStudent.getStudentCourses()) {
                 int index = theStudent.getStudentCourses().indexOf(course) + 1;
+
                 System.out.println(index + ": " + course.getCourseName());
 
             }
         }
 
-        displayMenu2();
+        runSystem();
 
     }
 
     //EFFECTS: display menu
-    private void displayMenu2() {
+    private void userMenu2() {
 
-        boolean keepGoing = true;
-        String command;
+        boolean running = true;
+        String userCommand;
 
-        input2 = new Scanner(System.in);
-        input2.useDelimiter("\n");
-        while (keepGoing) {
-            displayMenu();
-            command = input2.next();
-            if (command.equals("quit")) {
-                keepGoing = false;
+        // input2 = new Scanner(System.in);
+        // input2.useDelimiter("\n");
+        while (running) {
+            userMenu();
+            userCommand = input2.next();
+
+            if (userCommand.equals("quit")) {
+                running = false;
             } else {
-                processCommand(command);
+                processCommand(userCommand);
             }
         }
         System.out.println("Bye " + theStudent.getStudentName() + " !");
@@ -160,8 +169,7 @@ public class StudentCheckingSystem {
     //EFFECTS: register student into the selected course
     private void registerForCourse() {
         courseSelected().registerStudent(theStudent);
-        Scanner userInput = new Scanner(System.in);
-        displayMenu2();
+        runSystem();
     }
 
     //EFFECTS: process the user course selection command
@@ -183,8 +191,7 @@ public class StudentCheckingSystem {
     //EFFECTS: register student into the selected course
     private void deregisterFromCourse() {
         courseSelected().deregisterStudent(theStudent);
-        Scanner userInput = new Scanner(System.in);
-        displayMenu2();
+        runSystem();
     }
 
     //EFFECTS: pay student's fees and subtract amount from balance
@@ -199,11 +206,13 @@ public class StudentCheckingSystem {
         } else {
             System.out.println("There is no fees to be paid. Fees have previously been paid !");
         }
+        runSystem();
     }
 
     //EFFECTS: print out the balance in student account
     private void checkBalance() {
         System.out.println("Your account balance is : " + theStudent.getAccountBalance() + " $ !");
+        runSystem();
     }
 
     //EFFECTS: processes amount entered and deposit it into student account
@@ -213,7 +222,65 @@ public class StudentCheckingSystem {
         int number = userInput.nextInt();
         theStudent.getAccount().deposit(number);
         System.out.println("Amount has been successfully deposited !");
+        runSystem();
     }
 
+
+    //EFFECTS: print the list of all the maintenance requests submitted by the student
+    private void viewMaintenanceRequests() {
+        if (theStudent.getRequestRoom().getRequests().size() == 0) {
+            System.out.println("You have not submitted any Maintenance Request Yet!");
+        } else {
+            System.out.println("Your submitted requests :");
+            for (MaintenanceRequest request : theStudent.getRequestRoom().getRequests()) {
+                int index = theStudent.getRequestRoom().getRequests().indexOf(request) + 1;
+                System.out.println("Request " + index + ": " + request.getTitle());
+                System.out.println("Problem Description : " + request.getProblem() + "\n");
+            }
+        }
+
+        runSystem();
+    }
+
+    //EFFECTS: adds a request to the list of submitted requests
+    private void submitRequest() {
+        Scanner userInput1 = new Scanner(System.in);
+        Scanner userInput2 = new Scanner(System.in);
+        System.out.println("Enter a title for your Maintenance Request !");
+        String title = userInput1.nextLine();
+        System.out.println("Enter the details of your Maintenance Request !");
+        String problem = userInput2.nextLine();
+        MaintenanceRequest request = new MaintenanceRequest(title, problem);
+        theStudent.getRequestRoom().submitRequest(request);
+        System.out.println("The request has been successfully submitted !");
+        runSystem();
+
+    }
+
+
+    //EFFECTS: removes a request to the list of submitted requests
+    private void deleteRequest() {
+        if (theStudent.getRequestRoom().getRequests().size() == 0) {
+            System.out.println("You have not submitted any request yet!");
+        } else {
+            MaintenanceRequest requestSelected = requestSelected();
+            theStudent.getRequestRoom().deleteRequest(requestSelected);
+
+        }
+        runSystem();
+    }
+
+    //EFFECTS: process the user course selection command
+    private MaintenanceRequest requestSelected() {
+        System.out.println("Please select the request you want to delete : \n");
+        int index = 1;
+        for (MaintenanceRequest request : theStudent.getRequestRoom().getRequests()) {
+            System.out.println(index + ": " + request.getTitle() + "\n");
+            index++;
+
+        }
+        int selection = input1.nextInt();
+        return theStudent.getRequestRoom().getRequests().get(selection - 1);
+    }
 
 }

@@ -34,6 +34,7 @@ public class Course {
                 return true;
             } else {
                 System.out.println("Insufficient balance !");
+                System.out.println("Please recharge your account !");
                 return false;
             }
         } else {

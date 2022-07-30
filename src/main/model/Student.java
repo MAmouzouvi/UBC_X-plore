@@ -1,7 +1,6 @@
 package model;
 
 
-import java.util.LinkedList;
 import java.util.List;
 
 //Represents a student with an id, a name, a list of courses they are registered in
@@ -10,15 +9,19 @@ public class Student {
     private int id;
     private String name;
     protected CourseRoom courses;
+    protected MaintenanceRequestRoom requests;
     protected Account account;
 
-   //EFFECTS: constructs a student with an id, a name, an initial balance
-   // and an empty list of registered courses
+    //REQUIRES: initialBalance >= 0
+    // EFFECTS: constructs a student with an id, a name, an initial balance
+    // and an empty list of registered courses
     public Student(int id, String name, int initialBalance) {
         this.id = id;
         this.name = name;
         this.courses = new CourseRoom("My Courses");
         this.account = new Account(initialBalance);
+        this.requests = new MaintenanceRequestRoom("My Requests");
+
     }
 
     //MODIFIES: this
@@ -91,6 +94,10 @@ public class Student {
     //EFFECTS: return the student (this)'s account balance
     public int getAccountBalance() {
         return this.account.balance;
+    }
+
+    public MaintenanceRequestRoom getRequestRoom() {
+        return this.requests;
     }
 
 }

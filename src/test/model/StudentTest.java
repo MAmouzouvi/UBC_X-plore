@@ -13,6 +13,12 @@ public class StudentTest {
     private Course testCourse2;
     private Course testCourse3;
 
+    private MaintenanceRequest request1;
+    private MaintenanceRequest request2;
+    private MaintenanceRequest request3;
+
+    private MaintenanceRequestRoom testMaintenanceRequestRoom;
+
 
     @BeforeEach
     public void setUp(){
@@ -21,6 +27,11 @@ public class StudentTest {
         testCourse3 = new Course("UX Design", 50000);
 
         testStudent = new Student(1,"Makafui Amouzouvi",30000);
+
+        testMaintenanceRequestRoom = new MaintenanceRequestRoom("Test Room");
+        request1 = new MaintenanceRequest("Kitchen Maintenance", "Dishwasher not working");
+        request2 = new MaintenanceRequest("Living room maintenance", "Dirty couch");
+        request3 = new MaintenanceRequest("Room Maintenance", "Broken windows");
 
     }
 
@@ -117,5 +128,17 @@ public class StudentTest {
 
     public void testGetAccount(){
         assertEquals(30000,testStudent.getAccount().getBalance());
+    }
+
+    @Test
+    public void testGetMaintenanceRequestRoom(){
+        assertEquals(0, testStudent.getRequestRoom().getRequests().size());
+
+        testStudent.requests.submitRequest(request1);
+        testStudent.requests.submitRequest(request2);
+        testStudent.requests.submitRequest(request3);
+        assertEquals(3, testStudent.getRequestRoom().getRequests().size());
+        assertEquals(request1,testStudent.getRequestRoom().getRequests().get(0));
+
     }
 }

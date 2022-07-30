@@ -15,6 +15,7 @@ A student can use this application to:
 - pay some school and recreational fees.
 
 
+
 - *Who can use it?*
 
 My target market right now is the Student market
@@ -35,4 +36,9 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 - As a user, I want to be able to check my student account balance
 - As a user, I want to be able to deposit money onto my student account
 - As a user, I want to be able to pay fees such as housing fees and recreation fees
+- As a user, I want to be able to submit a maintenance request
+- As a user, I want to be able to delete a maintenance request
+- As a user, I want to be able to view the list of submitted maintenance requests
+- As a user, I want to be able to save my ------ to a file
+- As a user, I want to be able to load ... from a file
 
