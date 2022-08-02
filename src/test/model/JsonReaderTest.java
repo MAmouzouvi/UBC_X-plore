@@ -39,11 +39,11 @@ public class JsonReaderTest extends JsonTest{
         JsonReader reader = new JsonReader("./data/testReaderGeneralStudent.json");
         try {
             Student student = reader.read();
-            assertEquals("courses", student.getCourseRoom().getCourseRoomName());
+            assertEquals("courseRoom", student.getCourseRoom().getCourseRoomName());
             List<Course> courses = student.getStudentCourses();
             assertEquals(2, student.getCourseRoom().getCourseRoomSize());
-            assertEquals("physics",student.getStudentCourses().get(0));
-            assertEquals("statistics",student.getStudentCourses().get(1));
+            assertEquals("Physics",student.getStudentCourses().get(0).getCourseName());
+            assertEquals("Statistics",student.getStudentCourses().get(1).getCourseName());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
