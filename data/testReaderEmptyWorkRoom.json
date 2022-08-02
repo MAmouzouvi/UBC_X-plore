@@ -1,0 +1,12 @@
+{
+  "courseRoom": {
+    "courses": [],
+    "courseRoomName": "courseRoom"
+  },
+  "maintenanceRequestRoom": {
+    "requestListName": "maintenanceRequestRoom",
+    "requests": []
+  },
+  "name": "Makafui Amouzouvi",
+  "account": {"balance": 0}
+}
