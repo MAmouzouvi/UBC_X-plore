@@ -41,9 +41,19 @@ public class JsonReaderTest extends JsonTest{
             Student student = reader.read();
             assertEquals("courseRoom", student.getCourseRoom().getCourseRoomName());
             List<Course> courses = student.getStudentCourses();
-            assertEquals(2, student.getCourseRoom().getCourseRoomSize());
-            assertEquals("Physics",student.getStudentCourses().get(0).getCourseName());
-            assertEquals("Statistics",student.getStudentCourses().get(1).getCourseName());
+            assertEquals(2, courses.size());
+            assertEquals("Physics",courses.get(0).getCourseName());
+            assertEquals("Statistics",courses.get(1).getCourseName());
+
+
+            assertEquals("maintenanceRequestRoom", student.getMaintenanceRequestRoom().getRequestRoomName());
+            List<MaintenanceRequest> requests = student.getRequestRoom().getRequests();
+            assertEquals(2, requests.size());
+            assertEquals("kitchen issue",requests.get(0).getTitle());
+            assertEquals("dishwasher is not working",requests.get(0).getProblem());
+            assertEquals("bathroom issue",requests.get(1).getTitle());
+            assertEquals("floading from sink",requests.get(1).getProblem());
+
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
