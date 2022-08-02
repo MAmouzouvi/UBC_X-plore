@@ -26,7 +26,8 @@ public class StudentTest {
         testCourse2 = new Course("MATH200",3000);
         testCourse3 = new Course("UX Design", 50000);
 
-        testStudent = new Student(1,"Makafui Amouzouvi",30000);
+        testStudent = new Student("Makafui Amouzouvi");
+        testStudent.account.deposit(30000);
 
         testMaintenanceRequestRoom = new MaintenanceRequestRoom("Test Room");
         request1 = new MaintenanceRequest("Kitchen Maintenance", "Dishwasher not working");
@@ -37,7 +38,6 @@ public class StudentTest {
 
     @Test
     public void testStudent(){
-        assertEquals(1, testStudent.getStudentId());
         assertEquals("Makafui Amouzouvi", testStudent.getStudentName());
         assertEquals(30000, testStudent.getAccountBalance());
         assertEquals(0, testStudent.getStudentCourses().size());
@@ -99,11 +99,6 @@ public class StudentTest {
     }
 
     @Test
-            public void testGetStudentId(){
-        assertEquals(1, testStudent.getStudentId());
-    }
-
-    @Test
             public void testGetStudentCourses(){
         assertEquals(0, testStudent.getStudentCourses().size());
 
@@ -134,9 +129,9 @@ public class StudentTest {
     public void testGetMaintenanceRequestRoom(){
         assertEquals(0, testStudent.getRequestRoom().getRequests().size());
 
-        testStudent.requests.submitRequest(request1);
-        testStudent.requests.submitRequest(request2);
-        testStudent.requests.submitRequest(request3);
+        testStudent.maintenanceRequestRoom.submitRequest(request1);
+        testStudent.maintenanceRequestRoom.submitRequest(request2);
+        testStudent.maintenanceRequestRoom.submitRequest(request3);
         assertEquals(3, testStudent.getRequestRoom().getRequests().size());
         assertEquals(request1,testStudent.getRequestRoom().getRequests().get(0));
 

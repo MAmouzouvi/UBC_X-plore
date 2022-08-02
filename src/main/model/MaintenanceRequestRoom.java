@@ -1,17 +1,21 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.LinkedList;
 import java.util.List;
 
 //represents a collection of maintenance requests submitted
-public class MaintenanceRequestRoom {
+public class MaintenanceRequestRoom implements Writable {
 
-    private String name;
+    private String requestListName;
     private List<MaintenanceRequest> requests;
 
     //EFFECTS: create a collection of maintenance requests with a name. List is empty
     public MaintenanceRequestRoom(String name) {
-        this.name = name;
+        this.requestListName = name;
         requests = new LinkedList<>();
 
     }
@@ -53,8 +57,25 @@ public class MaintenanceRequestRoom {
 
     //EFFECTS: returns the Maintenance Requets room name
     public String getRequestRoomName() {
-        return this.name;
+        return this.requestListName;
     }
 
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("requestListName",requestListName);
+        json.put("requests",requestsToJson());
+
+        return json;
+    }
+
+    private JSONArray requestsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (MaintenanceRequest request : requests) {
+            jsonArray.put(request.toJson());
+        }
+        return jsonArray;
+    }
 
 }

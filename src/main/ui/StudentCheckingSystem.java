@@ -1,8 +1,12 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +14,9 @@ import java.util.Scanner;
 
 //Represents a student services checking system
 public class StudentCheckingSystem {
+    private static final String JSON_STUDENT_ROOM = "./data/studentRoom.json";
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
 
     private static int RECREATION_FEE = 1000;
     private static int HOUSING_FEE = 10000;
@@ -33,6 +40,8 @@ public class StudentCheckingSystem {
     public StudentCheckingSystem() {
         input1 = new Scanner(System.in);
         input2 = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STUDENT_ROOM);
+        jsonReader = new JsonReader(JSON_STUDENT_ROOM);
         initialize();
         runSystem();
     }
@@ -60,7 +69,7 @@ public class StudentCheckingSystem {
     //MODIFIES :this
     //EFFECTS: initializes a student's system details
     private void initialize() {
-        theStudent = new Student(8653, "Makafui Amouzouvi", 0);
+        theStudent = new Student("Makafui Amouzouvi");
         input1 = new Scanner(System.in);
         input1.useDelimiter("\n");
 
@@ -96,11 +105,14 @@ public class StudentCheckingSystem {
         System.out.println("\t7 -> View Maintenance Requests");
         System.out.println("\t8 -> Submit a Maintenance request");
         System.out.println("\t9 -> Delete a Maintenance request");
+        System.out.println("\t10 -> Save student's room status to file");
+        System.out.println("\t11 -> Load student's room status from file");
         System.out.println("\tquit -> quit");
     }
 
     //MODIFIES: this
     //EFFECTS: processes commands from user
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void processCommand(String command) {
         if (command.equals("1")) {
             viewCourses();
@@ -120,6 +132,10 @@ public class StudentCheckingSystem {
             submitRequest();
         } else if (command.equals("9")) {
             deleteRequest();
+        } else if (command.equals("10")) {
+            saveStudentCheckingSystemStatus();
+        } else if (command.equals("11")) {
+            loadStudentCheckingSystemStatus();
         } else {
             System.out.println("Selection is not valid...");
         }
@@ -168,7 +184,9 @@ public class StudentCheckingSystem {
 
     //EFFECTS: register student into the selected course
     private void registerForCourse() {
-        courseSelected().registerStudent(theStudent);
+
+        theStudent.registerToCourse(courseSelected());
+        //  courseSelected().registerStudent(theStudent);
         runSystem();
     }
 
@@ -176,7 +194,7 @@ public class StudentCheckingSystem {
     private Course courseSelected() {
         System.out.println("Please select the course you want to register for : \n");
         int index = 1;
-        for (Course course : offeredCourses.getCourseList()) {
+        for (Course course : offeredCourses.getCourses()) {
             System.out.println(index + ": " + course.getCourseName());
             System.out.println("Price: " + course.getCourseCost() + " $ \n");
 
@@ -184,13 +202,14 @@ public class StudentCheckingSystem {
 
         }
         int selection = input1.nextInt();
-        return offeredCourses.getCourseList().get(selection - 1);
+        return offeredCourses.getCourses().get(selection - 1);
     }
 
 
     //EFFECTS: register student into the selected course
     private void deregisterFromCourse() {
-        courseSelected().deregisterStudent(theStudent);
+        theStudent.deregisterFromCourse(courseSelected());
+        //courseSelected().deregisterStudent(theStudent);
         runSystem();
     }
 
@@ -281,6 +300,28 @@ public class StudentCheckingSystem {
         }
         int selection = input1.nextInt();
         return theStudent.getRequestRoom().getRequests().get(selection - 1);
+    }
+
+    private void saveStudentCheckingSystemStatus() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(theStudent);
+            jsonWriter.close();
+            System.out.println("Saved " + theStudent.getStudentName() + "'s services system status to "
+                    + JSON_STUDENT_ROOM);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STUDENT_ROOM);
+        }
+    }
+
+
+    private void loadStudentCheckingSystemStatus() {
+        try {
+            theStudent = jsonReader.read();
+            System.out.println("Loaded " + theStudent.getStudentName() + " from " + JSON_STUDENT_ROOM);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STUDENT_ROOM);
+        }
     }
 
 }

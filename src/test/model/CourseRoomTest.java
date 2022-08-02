@@ -32,12 +32,12 @@ public class CourseRoomTest {
     public void testAddCourse(){
         //add first course
         assertTrue(testCourseRoom.addCourse(testCourse1));
-        assertEquals(testCourse1, testCourseRoom.getCourseList().get(0));
-        assertEquals(1, testCourseRoom.getCourseList().size());
+        assertEquals(testCourse1, testCourseRoom.getCourses().get(0));
+        assertEquals(1, testCourseRoom.getCourses().size());
 
         //add one more course for cumulative test
         assertTrue(testCourseRoom.addCourse(testCourse2));
-        assertEquals(testCourse2, testCourseRoom.getCourseList().get(1));
+        assertEquals(testCourse2, testCourseRoom.getCourses().get(1));
 
         //add course already in list
         assertFalse(testCourseRoom.addCourse(testCourse1));
@@ -53,18 +53,18 @@ public class CourseRoomTest {
 
         // ---- adding courses
         assertTrue(testCourseRoom.addCourse(testCourse1));
-        assertEquals(testCourse1,testCourseRoom.getCourseList().get(0));
+        assertEquals(testCourse1,testCourseRoom.getCourses().get(0));
 
         assertTrue(testCourseRoom.addCourse(testCourse2));
-        assertEquals(testCourse2,testCourseRoom.getCourseList().get(1));
-        assertEquals(2,testCourseRoom.getCourseList().size());
+        assertEquals(testCourse2,testCourseRoom.getCourses().get(1));
+        assertEquals(2,testCourseRoom.getCourses().size());
 
         //---- removing  courses
         assertTrue(testCourseRoom.removeCourse(testCourse1));
 
-        assertEquals(1,testCourseRoom.getCourseList().size());
+        assertEquals(1,testCourseRoom.getCourses().size());
 
         assertTrue(testCourseRoom.removeCourse(testCourse2));
-        assertEquals(0,testCourseRoom.getCourseList().size());
+        assertEquals(0,testCourseRoom.getCourses().size());
     }
 }

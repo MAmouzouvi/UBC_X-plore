@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 //Represents a housing maintenance request that a student can send to
 //their school
-public class MaintenanceRequest {
+public class MaintenanceRequest implements Writable {
 
     private String title;
     private String problem;
@@ -27,5 +31,12 @@ public class MaintenanceRequest {
     // request object
     public String getProblem() {
         return this.problem;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title",title);
+        json.put("problem",problem);
+        return json;
     }
 }

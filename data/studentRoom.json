@@ -1,0 +1,30 @@
+{
+    "courseRoom": {
+        "courses": [
+            {
+                "courseName": "Physics",
+                "cost": 2000
+            },
+            {
+                "courseName": "Statistics",
+                "cost": 7000
+            }
+        ],
+        "courseRoomName": "courseRoom"
+    },
+    "maintenanceRequestRoom": {
+        "requestListName": "maintenanceRequestRoom",
+        "requests": [
+            {
+                "problem": "dishwasher is not working",
+                "title": "kicthen issue"
+            },
+            {
+                "problem": "floading from sink",
+                "title": "bathroom issue"
+            }
+        ]
+    },
+    "name": "Makafui Amouzouvi",
+    "account": {"balance": 19067}
+}

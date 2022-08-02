@@ -1,14 +1,15 @@
 package model;
 
+import org.json.JSONObject;
+
 // represents a student financial account. Every amount is in $.
 public class Account {
     protected int balance;
 
-    //REQUIRES: initialBalance >= 0
     //EFFECTS: constructs a student financial account with a given
     //initial balance.
-    public Account(int initialBalance) {
-        this.balance = initialBalance;
+    public Account() {
+        this.balance = 0;
 
     }
 
@@ -40,4 +41,9 @@ public class Account {
         return balance;
     }
 
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("balance",balance);
+        return json;
+    }
 }

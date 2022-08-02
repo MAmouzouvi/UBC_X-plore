@@ -1,23 +1,28 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.LinkedList;
 import java.util.List;
 
 //Represent a course with a name, a cost and a list of registered Students
-public class Course {
-    private String name;
+public class Course implements Writable {
+    private String courseName;
     protected int cost;
-    protected List<Student> students;
+   // protected List<Student> students;
 
 
     //REQUIRES: cost > 0;
     // EFFECTS: constructs a course with a name and a cost, and an empty list of registered students
     public Course(String name, int cost) {
-        this.name = name;
+        this.courseName = name;
         this.cost = cost;
-        this.students = new LinkedList<>();
+       // this.students = new LinkedList<>();
     }
 
+/*
 
     //MODIFIES: this
     //EFFECTS: if student is not registered in the course,
@@ -28,7 +33,7 @@ public class Course {
             if (student.account.balance >= this.cost) {
                 student.account.payFee(this.cost);
                 this.students.add(student);
-                student.courses.addCourse(this);
+                student.courseRoom.addCourse(this);
                 System.out.println("Student " + student.getStudentName()
                         + " has been successfully registered into the course !");
                 return true;
@@ -53,7 +58,7 @@ public class Course {
     public boolean deregisterStudent(Student student) {
         if (students.contains(student)) {
             this.students.remove(student);
-            student.courses.removeCourse(this);
+            student.courseRoom.removeCourse(this);
             student.account.balance += this.cost;
             System.out.println("Student " + student.getStudentName()
                     + " has been successfully removed from the course");
@@ -65,18 +70,34 @@ public class Course {
 
     }
 
+*/
 
     public String getCourseName() {
-        return this.name;
+        return this.courseName;
     }
 
     public int getCourseCost() {
         return this.cost;
     }
-
+/*
     public List<Student> getStudents() {
         return this.students;
+    }*/
+
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("courseName", courseName);
+        json.put("cost", cost);
+ //       json.put("students", studentsToJson());
+        return json;
     }
-
-
+/*
+    private JSONArray studentsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Student student : students) {
+            jsonArray.put(student.toJson());
+        }
+        return jsonArray;
+    }*/
 }
