@@ -39,6 +39,6 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 - As a user, I want to be able to submit a maintenance request
 - As a user, I want to be able to delete a maintenance request
 - As a user, I want to be able to view the list of submitted maintenance requests
-- As a user, I want to be able to save my ------ to a file
-- As a user, I want to be able to load ... from a file
+- As a user, I want to be able to save my Student Services Account Status to a file
+- As a user, I want to be able to load my Student Services Account Status from a file
 

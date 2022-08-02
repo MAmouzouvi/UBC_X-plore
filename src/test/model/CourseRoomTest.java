@@ -78,11 +78,4 @@ public class CourseRoomTest {
         testCourseRoom.toJson().get("courseRoomName"));
     }
 
-    @Test
-    public void testCoursesToJson(){
-        CourseRoom newCourseRoom = new CourseRoom("test");
-        testCourseRoom.addCourse(testCourse1);
-        testCourseRoom.coursesToJson();
-      //  assertEquals("testCourse1",testCourseRoom.coursesToJson().get("courseRoomName"));
-    }
 }

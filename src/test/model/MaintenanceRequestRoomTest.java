@@ -94,7 +94,7 @@ public class MaintenanceRequestRoomTest {
     }
     @Test
     public void testToJson(){
-        //
+        assertEquals("Test Room",testMaintenanceRequestRoom.toJson().get("requestListName"));
     }
 
 }

@@ -136,4 +136,8 @@ public class StudentTest {
         assertEquals(request1,testStudent.getRequestRoom().getRequests().get(0));
 
     }
+    @Test
+    public void testToJson(){
+        assertEquals("Makafui Amouzouvi",testStudent.toJson().get("name"));
+    }
 }
