@@ -1,0 +1,18 @@
+{
+    "courseRoom": {
+        "courses": [{
+            "courseName": "course1",
+            "cost": 1000
+        }],
+        "courseRoomName": "courseRoom"
+    },
+    "maintenanceRequestRoom": {
+        "requestListName": "maintenanceRequestRoom",
+        "requests": [{
+            "problem": "broken sink",
+            "title": "kitchen issue"
+        }]
+    },
+    "name": "Makafui",
+    "account": {"balance": 0}
+}
