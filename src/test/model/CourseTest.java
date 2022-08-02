@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -98,6 +99,11 @@ public class CourseTest {
     public void testGetCourseCost(){
         assertEquals(5000,testCourse.getCourseCost());
     }
+    @Test
+    public void testToJson(){
+        // JSONObject jsonObject = new JSONObject();
+        assertEquals("CPSC210",testCourse.toJson().get("courseName"));
+    }
 
  /*   @Test
     public void testGetStudents(){
@@ -111,4 +117,7 @@ public class CourseTest {
         assertEquals(testStudent2,testCourse.getStudents().get(1));
         assertEquals(2,testCourse.students.size());
     }*/
+
+
+
 }

@@ -78,7 +78,7 @@ public class CourseRoom implements Writable {
         return json;
     }
 
-    private JSONArray coursesToJson() {
+    public JSONArray coursesToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Course course : courses) {
             jsonArray.put(course.toJson());

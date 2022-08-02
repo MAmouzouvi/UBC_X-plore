@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -53,5 +54,12 @@ public class AccountTest {
         testAccount.payFee(2000);
         assertEquals(23000,testAccount.balance);
 
+    }
+
+    @Test
+    public void testToJson(){
+        JSONObject json = new JSONObject();
+       json.put("balance",20000);
+       assertEquals(20000,testAccount.toJson().get("balance"));
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -66,5 +68,21 @@ public class CourseRoomTest {
 
         assertTrue(testCourseRoom.removeCourse(testCourse2));
         assertEquals(0,testCourseRoom.getCourses().size());
+    }
+
+
+    @Test
+    public void testToJson(){
+        JSONArray jsonArray = new JSONArray();
+        assertEquals("testCourseRoom",
+        testCourseRoom.toJson().get("courseRoomName"));
+    }
+
+    @Test
+    public void testCoursesToJson(){
+        CourseRoom newCourseRoom = new CourseRoom("test");
+        testCourseRoom.addCourse(testCourse1);
+        testCourseRoom.coursesToJson();
+      //  assertEquals("testCourse1",testCourseRoom.coursesToJson().get("courseRoomName"));
     }
 }
