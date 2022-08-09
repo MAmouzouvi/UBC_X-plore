@@ -1,5 +1,6 @@
 package model;
 
+import model.Exceptions.NegativeAmountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,12 +23,28 @@ public class StudentTest {
 
     @BeforeEach
     public void setUp(){
-        testCourse1 = new Course("CPSC210",5000);
-        testCourse2 = new Course("MATH200",3000);
-        testCourse3 = new Course("UX Design", 50000);
+        try {
+            testCourse1 = new Course("CPSC210",5000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
+        try {
+            testCourse2 = new Course("MATH200",3000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
+        try {
+            testCourse3 = new Course("UX Design", 50000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
 
         testStudent = new Student("Makafui Amouzouvi");
-        testStudent.account.deposit(30000);
+        try {
+            testStudent.account.deposit(30000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
 
         testMaintenanceRequestRoom = new MaintenanceRequestRoom("Test Room");
         request1 = new MaintenanceRequest("Kitchen Maintenance", "Dishwasher not working");

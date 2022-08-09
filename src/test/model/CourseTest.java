@@ -1,5 +1,6 @@
 package model;
 
+import model.Exceptions.NegativeAmountException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,15 +16,11 @@ public class CourseTest {
 
     @BeforeEach
     public void setUp(){
-        testCourse = new Course("CPSC210",5000);
-        testStudent1 = new Student("Makafui Amouzouvi");
-        testStudent1.account.deposit(30000);
-        testStudent2 = new Student("Jean Baptiste");
-        testStudent2.account.deposit(20000);
-        testStudent3 = new Student( "Luc Canada");
-        testStudent3.account.deposit(10000);
-        testStudent4 = new Student("Sophia France");
-        testStudent4.account.deposit(3000);
+        try {
+            testCourse = new Course("CPSC210",5000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
     }
 
     @Test

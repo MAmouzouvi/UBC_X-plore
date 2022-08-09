@@ -1,5 +1,6 @@
 package model;
 
+import model.Exceptions.NegativeAmountException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,9 +19,21 @@ public class CourseRoomTest {
     @BeforeEach
     public void setUp(){
         testCourseRoom = new CourseRoom("testCourseRoom");
-        testCourse1 = new Course("CPSC210",5000);
-        testCourse2 = new Course("MATH200",3000);
-        testCourse3 = new Course("UX Design", 50000);
+        try {
+            testCourse1 = new Course("CPSC210",5000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
+        try {
+            testCourse2 = new Course("MATH200",3000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
+        try {
+            testCourse3 = new Course("UX Design", 50000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
 
     }
 

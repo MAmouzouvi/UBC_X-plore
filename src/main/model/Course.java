@@ -1,5 +1,6 @@
 package model;
 
+import model.Exceptions.NegativeAmountException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -11,15 +12,17 @@ import java.util.List;
 public class Course implements Writable {
     private String courseName;
     protected int cost;
-   // protected List<Student> students;
+    // protected List<Student> students;
 
 
-    //REQUIRES: cost > 0;
     // EFFECTS: constructs a course with a name and a cost, and an empty list of registered students
-    public Course(String name, int cost) {
+    public Course(String name, int cost) throws NegativeAmountException {
+        if (cost < 0) {
+            throw new NegativeAmountException();
+        }
         this.courseName = name;
         this.cost = cost;
-       // this.students = new LinkedList<>();
+        // this.students = new LinkedList<>();
     }
 
 /*
@@ -89,7 +92,7 @@ public class Course implements Writable {
         JSONObject json = new JSONObject();
         json.put("courseName", courseName);
         json.put("cost", cost);
- //       json.put("students", studentsToJson());
+        //       json.put("students", studentsToJson());
         return json;
     }
 /*

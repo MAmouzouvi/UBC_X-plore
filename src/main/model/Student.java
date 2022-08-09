@@ -92,10 +92,7 @@ public class Student implements Writable {
         return this.courseRoom;
     }
 
-    //EFFECTS: return the list of courses the student is registered in
-    public MaintenanceRequestRoom getMaintenanceRequestRoom() {
-        return this.maintenanceRequestRoom;
-    }
+
 
     //EFFECTS: return the student (this)'s account balance
     public int getAccountBalance() {

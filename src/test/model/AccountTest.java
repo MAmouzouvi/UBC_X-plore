@@ -1,5 +1,6 @@
 package model;
 
+import model.Exceptions.NegativeAmountException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,11 @@ public class AccountTest {
     @BeforeEach
     public void setUp(){
         testAccount = new Account();
-        testAccount.deposit(20000);
+        try {
+            testAccount.deposit(20000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
     }
 
     @Test
@@ -23,9 +28,17 @@ public class AccountTest {
 
     @Test
     public void testPayFees(){
-        testAccount.deposit(10000);
+        try {
+            testAccount.deposit(10000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
         assertEquals(30000,testAccount.getBalance());
-        testAccount.deposit(5000);
+        try {
+            testAccount.deposit(5000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
         assertEquals(35000,testAccount.getBalance());
     }
 
@@ -49,7 +62,11 @@ public class AccountTest {
     @Test
     public void testGetBalance(){
         assertEquals(20000,testAccount.balance);
-        testAccount.deposit(5000);
+        try {
+            testAccount.deposit(5000);
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
+        }
         assertEquals(25000,testAccount.getBalance());
         testAccount.payFee(2000);
         assertEquals(23000,testAccount.balance);

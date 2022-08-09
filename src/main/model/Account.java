@@ -1,5 +1,6 @@
 package model;
 
+import model.Exceptions.NegativeAmountException;
 import org.json.JSONObject;
 
 // represents a student financial account. Every amount is in $.
@@ -13,10 +14,12 @@ public class Account {
 
     }
 
-    // REQUIRES: amount > 0
     // MODIFIES: this
     // EFFECTS: adds amount to balance of student
-    public void deposit(int amount) {
+    public void deposit(int amount) throws NegativeAmountException {
+        if (amount < 0) {
+            throw new NegativeAmountException();
+        }
         this.balance += amount;
     }
 
@@ -43,7 +46,7 @@ public class Account {
 
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("balance",balance);
+        json.put("balance", balance);
         return json;
     }
 }

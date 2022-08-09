@@ -1,5 +1,6 @@
 package model;
 
+import model.Exceptions.NegativeAmountException;
 import org.junit.jupiter.api.Test;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -76,6 +77,8 @@ public class JsonWriterTest extends JsonTest{
 
         } catch (IOException e) {
             //fail("Exception should not have been thrown");
+        } catch (NegativeAmountException e) {
+            fail("Exception not expected");
         }
     }
 

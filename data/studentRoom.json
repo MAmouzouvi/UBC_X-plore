@@ -2,12 +2,16 @@
     "courseRoom": {
         "courses": [
             {
+                "courseName": "Computer Science",
+                "cost": 5000
+            },
+            {
                 "courseName": "Physics",
                 "cost": 2000
             },
             {
-                "courseName": "Statistics",
-                "cost": 7000
+                "courseName": "Mathematics",
+                "cost": 6000
             }
         ],
         "courseRoomName": "courseRoom"
@@ -16,15 +20,15 @@
         "requestListName": "maintenanceRequestRoom",
         "requests": [
             {
-                "problem": "dishwasher is not working",
-                "title": "kitchen issue"
+                "problem": "Dishwasher is not working",
+                "title": "Kitchen issue"
             },
             {
-                "problem": "floading from sink",
-                "title": "bathroom issue"
+                "problem": "Tub is broken",
+                "title": "Bathroom issue"
             }
         ]
     },
     "name": "Makafui Amouzouvi",
-    "account": {"balance": 19067}
+    "account": {"balance": 0}
 }

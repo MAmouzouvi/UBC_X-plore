@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.Exceptions.NegativeAmountException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -42,17 +43,23 @@ public class StudentCheckingSystem {
         input2 = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STUDENT_ROOM);
         jsonReader = new JsonReader(JSON_STUDENT_ROOM);
-        initialize();
-        runSystem();
+        try {
+            initialize();
+        } catch (NegativeAmountException e) {
+            System.out.println("Course cost is negative : Illegal amount!");
+        }
+        try {
+            runSystem();
+        } catch (NegativeAmountException e) {
+            System.out.println("You entered a negative amount");
+        }
     }
 
     //MODIFIES: this
     //EFFECTS: analyses and works on user inputs
-    private void runSystem() {
+    private void runSystem() throws NegativeAmountException {
         boolean running = true;
         String userCommand;
-
-
         while (running) {
             userMenu();
             userCommand = input1.next();
@@ -68,7 +75,7 @@ public class StudentCheckingSystem {
 
     //MODIFIES :this
     //EFFECTS: initializes a student's system details
-    private void initialize() {
+    private void initialize() throws NegativeAmountException {
         theStudent = new Student("Makafui Amouzouvi");
         input1 = new Scanner(System.in);
         input1.useDelimiter("\n");
@@ -113,7 +120,7 @@ public class StudentCheckingSystem {
     //MODIFIES: this
     //EFFECTS: processes commands from user
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private void processCommand(String command) {
+    private void processCommand(String command) throws NegativeAmountException {
         if (command.equals("1")) {
             viewCourses();
         } else if (command.equals("2")) {
@@ -143,7 +150,7 @@ public class StudentCheckingSystem {
 
 
     //EFFECTS: print the list of all the courses the student is registered in
-    private void viewCourses() {
+    private void viewCourses() throws NegativeAmountException {
         if (theStudent.getStudentCourses().size() == 0) {
             System.out.println("You are not registered in any course yet!");
         } else {
@@ -161,7 +168,7 @@ public class StudentCheckingSystem {
     }
 
     //EFFECTS: display menu
-    private void userMenu2() {
+    private void userMenu2() throws NegativeAmountException {
 
         boolean running = true;
         String userCommand;
@@ -183,7 +190,7 @@ public class StudentCheckingSystem {
 
 
     //EFFECTS: register student into the selected course
-    private void registerForCourse() {
+    private void registerForCourse() throws NegativeAmountException {
 
         theStudent.registerToCourse(courseSelected());
         //  courseSelected().registerStudent(theStudent);
@@ -207,14 +214,14 @@ public class StudentCheckingSystem {
 
 
     //EFFECTS: register student into the selected course
-    private void deregisterFromCourse() {
+    private void deregisterFromCourse() throws NegativeAmountException {
         theStudent.deregisterFromCourse(courseSelected());
         //courseSelected().deregisterStudent(theStudent);
         runSystem();
     }
 
     //EFFECTS: pay student's fees and subtract amount from balance
-    private void payStudentFees() {
+    private void payStudentFees() throws NegativeAmountException {
         if (paidFees.size() == 0) {
             theStudent.getAccount().payFee(RECREATION_FEE);
             theStudent.getAccount().payFee(HOUSING_FEE);
@@ -229,13 +236,13 @@ public class StudentCheckingSystem {
     }
 
     //EFFECTS: print out the balance in student account
-    private void checkBalance() {
+    private void checkBalance() throws NegativeAmountException {
         System.out.println("Your account balance is : " + theStudent.getAccountBalance() + " $ !");
         runSystem();
     }
 
     //EFFECTS: processes amount entered and deposit it into student account
-    private void depositMoney() {
+    private void depositMoney() throws NegativeAmountException {
         Scanner userInput = new Scanner(System.in);
         System.out.println("Enter the amount you would like to deposit into your account($) :");
         int number = userInput.nextInt();
@@ -246,7 +253,7 @@ public class StudentCheckingSystem {
 
 
     //EFFECTS: print the list of all the maintenance requests submitted by the student
-    private void viewMaintenanceRequests() {
+    private void viewMaintenanceRequests() throws NegativeAmountException {
         if (theStudent.getRequestRoom().getRequests().size() == 0) {
             System.out.println("You have not submitted any Maintenance Request Yet!");
         } else {
@@ -262,7 +269,7 @@ public class StudentCheckingSystem {
     }
 
     //EFFECTS: adds a request to the list of submitted requests
-    private void submitRequest() {
+    private void submitRequest() throws NegativeAmountException {
         Scanner userInput1 = new Scanner(System.in);
         Scanner userInput2 = new Scanner(System.in);
         System.out.println("Enter a title for your Maintenance Request !");
@@ -278,7 +285,7 @@ public class StudentCheckingSystem {
 
 
     //EFFECTS: removes a request to the list of submitted requests
-    private void deleteRequest() {
+    private void deleteRequest() throws NegativeAmountException {
         if (theStudent.getRequestRoom().getRequests().size() == 0) {
             System.out.println("You have not submitted any request yet!");
         } else {

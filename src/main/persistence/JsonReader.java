@@ -1,6 +1,7 @@
 package persistence;
 
 import model.*;
+import model.Exceptions.NegativeAmountException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -45,7 +46,11 @@ public class JsonReader {
         student = new Student(name);
       //  addCourses(student.getCourseRoom(),jsonObject);
         parseCourseRoom(jsonObject);
-        parseAccount(jsonObject);
+        try {
+            parseAccount(jsonObject);
+        } catch (NegativeAmountException e) {
+            System.out.println("Error :Negative amount!");
+        }
         parseMaintenanceRequestRoom(jsonObject);
         //addStores(sr, jsonObject);
         return student;
@@ -55,10 +60,14 @@ public class JsonReader {
     private void parseCourseRoom(JSONObject jsonObject) {
         JSONObject jsonObject1 = jsonObject.getJSONObject("courseRoom");
         String name = jsonObject1.getString("courseRoomName");
-        addCourses(student.getCourseRoom(), jsonObject);
+        try {
+            addCourses(student.getCourseRoom(), jsonObject);
+        } catch (NegativeAmountException e) {
+            System.out.println("Course cost is negative : Illegal amount");
+        }
     }
 
-    private void addCourses(CourseRoom cr, JSONObject jsonObject) {
+    private void addCourses(CourseRoom cr, JSONObject jsonObject) throws NegativeAmountException {
         JSONObject jsonObject1 = jsonObject.getJSONObject("courseRoom");
         JSONArray jsonArray = jsonObject1.getJSONArray("courses");
         for (Object json : jsonArray) {
@@ -67,7 +76,7 @@ public class JsonReader {
         }
     }
 
-    private void addCourse(CourseRoom cr, JSONObject jsonObject) {
+    private void addCourse(CourseRoom cr, JSONObject jsonObject) throws NegativeAmountException {
         String name = jsonObject.getString("courseName");
         int cost = jsonObject.getInt("cost");
         Course course = new Course(name, cost);
@@ -101,7 +110,7 @@ public class JsonReader {
         mr.submitRequest(request);
     }
 
-    private void parseAccount(JSONObject jsonObject) {
+    private void parseAccount(JSONObject jsonObject) throws NegativeAmountException {
         JSONObject jsonObject1 = jsonObject.getJSONObject("account");
         int balance = jsonObject1.getInt("balance");
         student.getAccount().deposit(balance);
