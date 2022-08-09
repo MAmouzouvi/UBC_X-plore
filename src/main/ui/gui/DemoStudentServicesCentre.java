@@ -292,6 +292,7 @@ public class DemoStudentServicesCentre extends JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STUDENT_ROOM);
         }
+
     }
 
     private void loadStudentCheckingSystemStatus() {
