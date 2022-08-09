@@ -23,6 +23,7 @@ public class DemoStudentServicesCentre extends JFrame {
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
 
+
     private JPanel changingPanel;
     private JPanel upMenuPanel;
     private JPanel mainPanel;
