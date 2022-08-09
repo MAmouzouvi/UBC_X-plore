@@ -71,10 +71,12 @@ public class Course implements Writable {
 
 */
 
+    //EFFECTS: return the course name
     public String getCourseName() {
         return this.courseName;
     }
 
+    //EFFECTS: return the course cost
     public int getCourseCost() {
         return this.cost;
     }
@@ -84,6 +86,7 @@ public class Course implements Writable {
     }*/
 
 
+    //EFFECTS: write course as a JSON Object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("courseName", courseName);
@@ -91,12 +94,5 @@ public class Course implements Writable {
         //       json.put("students", studentsToJson());
         return json;
     }
-/*
-    private JSONArray studentsToJson() {
-        JSONArray jsonArray = new JSONArray();
-        for (Student student : students) {
-            jsonArray.put(student.toJson());
-        }
-        return jsonArray;
-    }*/
+
 }

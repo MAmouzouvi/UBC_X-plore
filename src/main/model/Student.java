@@ -99,11 +99,13 @@ public class Student implements Writable {
         return this.account.balance;
     }
 
+    //EFFECTS: return the maintenance room
     public MaintenanceRequestRoom getRequestRoom() {
         return this.maintenanceRequestRoom;
     }
 
     @Override
+    //EFFECTS: write Student as a JSON Object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

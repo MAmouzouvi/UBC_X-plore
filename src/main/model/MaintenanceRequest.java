@@ -33,6 +33,7 @@ public class MaintenanceRequest implements Writable {
         return this.problem;
     }
 
+    //Write Maintenance request as a JSON object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("title",title);

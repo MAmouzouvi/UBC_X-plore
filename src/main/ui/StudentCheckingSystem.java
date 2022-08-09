@@ -309,6 +309,8 @@ public class StudentCheckingSystem {
         return theStudent.getRequestRoom().getRequests().get(selection - 1);
     }
 
+
+   //EFFECTS: save student status to file
     private void saveStudentCheckingSystemStatus() {
         try {
             jsonWriter.open();
@@ -322,6 +324,7 @@ public class StudentCheckingSystem {
     }
 
 
+    //load student status from file
     private void loadStudentCheckingSystemStatus() {
         try {
             theStudent = jsonReader.read();

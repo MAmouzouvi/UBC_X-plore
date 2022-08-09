@@ -62,6 +62,7 @@ public class MaintenanceRequestRoom implements Writable {
 
 
     @Override
+    //EFFECTS: write maintenance request room as a JSON objects
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("requestListName",requestListName);
@@ -70,6 +71,7 @@ public class MaintenanceRequestRoom implements Writable {
         return json;
     }
 
+    //EFFECTS: write request list as JSONArray
     private JSONArray requestsToJson() {
         JSONArray jsonArray = new JSONArray();
         for (MaintenanceRequest request : requests) {

@@ -71,6 +71,7 @@ public class CourseRoom implements Writable {
     }
 
     @Override
+    //EFFECTS: write course room as a JSON Object
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("courseRoomName", courseRoomName);
@@ -78,6 +79,7 @@ public class CourseRoom implements Writable {
         return json;
     }
 
+    //EFFECTS: write course list as a JSONArray
     public JSONArray coursesToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Course course : courses) {
