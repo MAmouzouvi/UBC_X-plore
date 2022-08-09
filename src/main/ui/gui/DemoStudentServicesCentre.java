@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class DemoStudentServicesCentre extends JFrame {
     public static final int WIDTH = 800;
@@ -27,6 +27,7 @@ public class DemoStudentServicesCentre extends JFrame {
     private JPanel changingPanel;
     private JLabel upLabel;
     private JPanel mainPanel;
+    private JLabel photo;
 
     protected Student theStudent;
     private int balance;
@@ -59,26 +60,42 @@ public class DemoStudentServicesCentre extends JFrame {
         super("Student Services App");
         theStudent = new Student("Makafui Amouzouvi");
 
+        JLabel picture = new JLabel();
+        picture.setSize(new Dimension(100,100));
+        ImageIcon img = new ImageIcon("/Users/makafuiamouzouvi/project_d0q3f_/src/main/ui/gui/student.jpg");
+        Image img1 = img.getImage();
+        Image imgScale = img1.getScaledInstance(picture.getWidth(),picture.getHeight(),Image.SCALE_SMOOTH);
+        ImageIcon scaledImage = new ImageIcon(imgScale);
+        picture.setIcon(scaledImage);
+
+
+
         //panel can be course room panel or maintenance requests room panel
         changingPanel = new JPanel();
         initStudentCourseRoomPanel(changingPanel);
 
+
         //up panel
+
         JPanel newPanel = new JPanel();
-        newPanel.setBounds(0,0,1500,100);
-        newPanel.setBackground(Color.red);
+        newPanel.setBounds(0, 0, 1500, 100);
+        newPanel.setBackground(Color.GRAY);
 
         //student name
         upLabel = new JLabel("Welcome " + theStudent.getStudentName());
-        upLabel.setBounds(400,0,200,1000);
+        upLabel.setBounds(400, 0, 200, 1000);
         upLabel.setForeground(Color.BLACK);
-        upLabel.setFont(new Font("Times",Font.ITALIC, 28));
-       // upLabel.setLayout(new FlowLayout(1, 0, 0));
-        newPanel.add(upLabel, BorderLayout.NORTH);
-        newPanel.setPreferredSize(new Dimension(WIDTH,100));
-        add(newPanel,BorderLayout.NORTH);
+        upLabel.setFont(new Font("Times", Font.ITALIC, 28));
+        picture.setPreferredSize(new Dimension(100,100));
 
 
+        newPanel.add(picture,BorderLayout.WEST);
+
+
+        newPanel.add(upLabel, BorderLayout.PAGE_START);
+        newPanel.setPreferredSize(new Dimension(WIDTH, 100));
+
+        add(newPanel, BorderLayout.NORTH);
 
 
         //Main Panel
@@ -88,11 +105,9 @@ public class DemoStudentServicesCentre extends JFrame {
         mainPanel.add(changingPanel, BorderLayout.CENTER);
         add(mainPanel);
 
-
         //Left Menu Panel
         leftMenuPanel = new JPanel();
-        //leftMenuPanel.setBackground(new Color(1,1,1));
-        //add(courseRoomPanel);
+
         initLeftMenuPanel(leftMenuPanel);
         initSettings();
         initFields();
@@ -100,6 +115,7 @@ public class DemoStudentServicesCentre extends JFrame {
         setVisible(true);
 
     }
+
 
     private void initFields() throws NegativeAmountException {
 
@@ -191,7 +207,6 @@ public class DemoStudentServicesCentre extends JFrame {
         //panel.add(pane, BorderLayout.CENTER);
         //pane.setVisible(true);
         panel.setVisible(true);
-
     }
 
 
@@ -280,7 +295,6 @@ public class DemoStudentServicesCentre extends JFrame {
     private Course selectCourse() {
         selectionBox = new JComboBox();
         Course[] comboBoxData = new Course[offeredCourses.getCourseRoomSize()];
-        //comboBoxData = storeList.toArray(comboBoxData);
 
         for (Course course : offeredCourses.getCourses()) {
             selectionBox.addItem(course.getCourseName());
@@ -469,8 +483,8 @@ public class DemoStudentServicesCentre extends JFrame {
                 try {
                     theStudent.getAccount().deposit(amount);
                 } catch (NegativeAmountException ex) {
-                    JFrame popUpMessage = new JFrame();
-                    JOptionPane.showMessageDialog(popUpMessage, "Error : Negative amount !!");
+                    System.out.println("Negative Amount");
+
                 }
                 JFrame popUpMessage = new JFrame();
                 JOptionPane.showMessageDialog(popUpMessage, "The amount of  "
@@ -611,7 +625,6 @@ public class DemoStudentServicesCentre extends JFrame {
             updateCoursesRoom();
             JFrame parent = new JFrame();
             JOptionPane.showMessageDialog(parent, "Student Status was successfully loaded!");
-
         }
     }
 
