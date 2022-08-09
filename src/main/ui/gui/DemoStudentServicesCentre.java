@@ -25,7 +25,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
 
     private JPanel changingPanel;
-    private JPanel upMenuPanel;
+    private JLabel upLabel;
     private JPanel mainPanel;
 
     protected Student theStudent;
@@ -54,15 +54,31 @@ public class DemoStudentServicesCentre extends JFrame {
     private JComboBox selectionBox;
     private List<Course> courses;
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public DemoStudentServicesCentre() throws NegativeAmountException {
         super("Student Services App");
-
+        theStudent = new Student("Makafui Amouzouvi");
 
         //panel can be course room panel or maintenance requests room panel
         changingPanel = new JPanel();
         initStudentCourseRoomPanel(changingPanel);
-        //course roomPanel.setBackground(new Color(51, 0, 102));
-        // course roomPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+
+        //up panel
+        JPanel newPanel = new JPanel();
+        newPanel.setBounds(0,0,1500,100);
+        newPanel.setBackground(Color.red);
+
+        //student name
+        upLabel = new JLabel("Welcome " + theStudent.getStudentName());
+        upLabel.setBounds(400,0,200,1000);
+        upLabel.setForeground(Color.BLACK);
+        upLabel.setFont(new Font("Times",Font.ITALIC, 28));
+       // upLabel.setLayout(new FlowLayout(1, 0, 0));
+        newPanel.add(upLabel, BorderLayout.NORTH);
+        newPanel.setPreferredSize(new Dimension(WIDTH,100));
+        add(newPanel,BorderLayout.NORTH);
+
+
 
 
         //Main Panel
@@ -71,9 +87,7 @@ public class DemoStudentServicesCentre extends JFrame {
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(changingPanel, BorderLayout.CENTER);
         add(mainPanel);
-        //upMenuPanel
-        upMenuPanel = new JPanel();
-        upMenuPanel.setLayout(new FlowLayout(4, 0, 0));
+
 
         //Left Menu Panel
         leftMenuPanel = new JPanel();
@@ -88,9 +102,10 @@ public class DemoStudentServicesCentre extends JFrame {
     }
 
     private void initFields() throws NegativeAmountException {
-        theStudent = new Student("Makafui Amouzouvi");
+
         requests = theStudent.getRequestRoom().getRequests();
         balance = theStudent.getAccountBalance();
+
 
         //COURSES
         compScience = new Course("Computer Science", 5000);
@@ -189,9 +204,9 @@ public class DemoStudentServicesCentre extends JFrame {
     private void initLeftMenuPanel(JPanel panel) {
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(270, HEIGHT));
+        //panel.setBounds(0,100,WIDTH,HEIGHT);
         panel.setBackground(Color.BLACK);
         add(panel, BorderLayout.WEST);
-
         panel.setLayout(new FlowLayout(12, 10, 30));
         panel.add(initButton(new JButton(new ViewCoursesButton())));
         panel.add(initButton(new JButton(new RegisterForCourseButton())));
