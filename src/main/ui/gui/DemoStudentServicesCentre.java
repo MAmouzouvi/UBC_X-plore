@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-
+//Represent a student services centre website
 public class DemoStudentServicesCentre extends JFrame {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 730;
@@ -27,7 +27,6 @@ public class DemoStudentServicesCentre extends JFrame {
     private JPanel changingPanel;
     private JLabel upLabel;
     private JPanel mainPanel;
-    private JLabel photo;
 
     protected Student theStudent;
     private int balance;
@@ -55,11 +54,12 @@ public class DemoStudentServicesCentre extends JFrame {
     private JComboBox selectionBox;
     private List<Course> courses;
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    //EFFECTS: create an instance of this website
     public DemoStudentServicesCentre() throws NegativeAmountException {
         super("Student Services App");
         theStudent = new Student("Makafui Amouzouvi");
 
+        //insert icon which is student picture
         JLabel picture = new JLabel();
         picture.setSize(new Dimension(100,100));
         ImageIcon img = new ImageIcon("/Users/makafuiamouzouvi/project_d0q3f_/src/main/ui/gui/student.jpg");
@@ -68,55 +68,56 @@ public class DemoStudentServicesCentre extends JFrame {
         ImageIcon scaledImage = new ImageIcon(imgScale);
         picture.setIcon(scaledImage);
 
-
-
         //panel can be course room panel or maintenance requests room panel
         changingPanel = new JPanel();
         initStudentCourseRoomPanel(changingPanel);
 
-
         //up panel
-
-        JPanel newPanel = new JPanel();
-        newPanel.setBounds(0, 0, 1500, 100);
-        newPanel.setBackground(Color.GRAY);
-
-        //student name
-        upLabel = new JLabel("Welcome " + theStudent.getStudentName());
-        upLabel.setBounds(400, 0, 200, 1000);
-        upLabel.setForeground(Color.BLACK);
-        upLabel.setFont(new Font("Times", Font.ITALIC, 28));
-        picture.setPreferredSize(new Dimension(100,100));
-
-
-        newPanel.add(picture,BorderLayout.WEST);
-
-
-        newPanel.add(upLabel, BorderLayout.PAGE_START);
-        newPanel.setPreferredSize(new Dimension(WIDTH, 100));
-
-        add(newPanel, BorderLayout.NORTH);
-
+        JPanel upPanel = new JPanel();
+        initUpPanel(upPanel);
 
         //Main Panel
         mainPanel = new JPanel();
-        mainPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(changingPanel, BorderLayout.CENTER);
-        add(mainPanel);
-
+        initMainPanel(mainPanel);
         //Left Menu Panel
         leftMenuPanel = new JPanel();
-
         initLeftMenuPanel(leftMenuPanel);
         initSettings();
         initFields();
         pack();
         setVisible(true);
-
     }
 
 
+    //MODIFIES: this
+    // EFFECTS: Help initialize the up Panel on the Frame (Frame with the student name
+    //and image)
+    private void initUpPanel(JPanel upPanel) {
+        upPanel.setBounds(0, 0, 1500, 100);
+        upPanel.setBackground(Color.GRAY);
+        upLabel = new JLabel("Welcome " + theStudent.getStudentName());
+        upLabel.setBounds(400, 0, 200, 1000);
+        upLabel.setForeground(Color.BLACK);
+        upLabel.setFont(new Font("Times", Font.ITALIC, 28));
+        upPanel.setPreferredSize(new Dimension(WIDTH, 100));
+        add(upPanel, BorderLayout.NORTH);
+    }
+
+
+    //MODIFIES: this
+    // EFFECTS: Help initialize the main Panel on the Frame. Panel where are displayed the student activities
+    private void initMainPanel(JPanel mainPanel) {
+        mainPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(changingPanel, BorderLayout.CENTER);
+        add(mainPanel);
+    }
+
+
+
+
+    //MODIFIES: this
+    // EFFECTS: Help initialise the student fields and courses
     private void initFields() throws NegativeAmountException {
 
         requests = theStudent.getRequestRoom().getRequests();
@@ -147,8 +148,9 @@ public class DemoStudentServicesCentre extends JFrame {
         jsonReader = new JsonReader(JSON_STUDENT_ROOM);
     }
 
+    //MODIFIES: this
+    // EFFECTS: Help initialize how the frame is displayed on the screen of the desktop (center)
     private void initSettings() {
-
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
@@ -160,6 +162,9 @@ public class DemoStudentServicesCentre extends JFrame {
     }
 
 
+    //MODIFIES: this
+    // EFFECTS: Help initialize the course room panel on the frame. The course room panel is the panel where the
+    // registered classes are displayed
     private void initStudentCourseRoomPanel(JPanel panel) {
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         panel.setBackground(new Color(51, 0, 102));
@@ -179,12 +184,13 @@ public class DemoStudentServicesCentre extends JFrame {
         panel.add(pane, BorderLayout.CENTER);
         pane.setVisible(true);
 
-        //panel.add(pane, BorderLayout.CENTER);
-        //pane.setVisible(true);
         panel.setVisible(true);
 
     }
 
+    //MODIFIES: this
+    // EFFECTS: Help initialize the maintenance request room panel on the frame. The maintenance request room panel
+    // is the panel where the submitted maintenance requests are displayed
     private void initMaintenanceRequestsRoom(JPanel panel) {
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         panel.setBackground(new Color(51, 0, 102));
@@ -204,22 +210,16 @@ public class DemoStudentServicesCentre extends JFrame {
         panel.add(pane, BorderLayout.CENTER);
         pane.setVisible(true);
 
-        //panel.add(pane, BorderLayout.CENTER);
-        //pane.setVisible(true);
         panel.setVisible(true);
     }
 
-
-    // MODIFIES: this
-    // EFFECTS:  places the frame on the centre of the desktop
-    private void centreOnScreen() {
-
-    }
+    //MODIFIES: this
+    // EFFECTS: Help initialize the left menu bar on the frame.
 
     private void initLeftMenuPanel(JPanel panel) {
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(270, HEIGHT));
-        //panel.setBounds(0,100,WIDTH,HEIGHT);
+
         panel.setBackground(Color.BLACK);
         add(panel, BorderLayout.WEST);
         panel.setLayout(new FlowLayout(12, 10, 30));
@@ -235,12 +235,12 @@ public class DemoStudentServicesCentre extends JFrame {
         panel.add(initButton(new JButton(new CheckBalanceButton())));
         panel.add(initButton(new JButton(new DepositButton())));
         panel.add(initButton(new JButton(new QuitButton())));
-
-
-        // panel.setBackground(new Color(180, 180, 180));
         setVisible(true);
         panel.add(Box.createVerticalStrut(20));
     }
+
+    //MODIFIES: this
+    // EFFECTS: Help customize each button
 
     private Component initButton(JButton button) {
         button.setBorderPainted(false);
@@ -248,6 +248,7 @@ public class DemoStudentServicesCentre extends JFrame {
         button.setFont(new Font("Copperplate", Font.BOLD, 18));
         return button;
     }
+
 
     /**
      * Helper to update the course room Panel anytime the student register or deregister from a course
@@ -289,7 +290,7 @@ public class DemoStudentServicesCentre extends JFrame {
     }
 
     /**
-     * Pop-up tp select a Course
+     * Pop-up to select a Course
      */
 
     private Course selectCourse() {
@@ -310,6 +311,9 @@ public class DemoStudentServicesCentre extends JFrame {
         return null;
 
     }
+    /**
+     * Pop-up to select a Request
+     */
 
     private MaintenanceRequest selectRequest() {
         selectionBox = new JComboBox();
@@ -329,6 +333,9 @@ public class DemoStudentServicesCentre extends JFrame {
         return null;
     }
 
+
+   //MODIFIES: this
+    //EFFECTS: save student status to file
     private void saveStudentCheckingSystemStatus() {
         try {
             jsonWriter.open();
@@ -342,6 +349,8 @@ public class DemoStudentServicesCentre extends JFrame {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: save student status to file
     private void loadStudentCheckingSystemStatus() {
         try {
             theStudent = jsonReader.read();
@@ -352,6 +361,7 @@ public class DemoStudentServicesCentre extends JFrame {
     }
 
 
+    //Represent the view courses button
     private class ViewCoursesButton extends AbstractAction {
 
         ViewCoursesButton() {
@@ -375,6 +385,7 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+    //Represent the register for course button
     private class RegisterForCourseButton extends AbstractAction {
         RegisterForCourseButton() {
             super("Register for Course");
@@ -402,6 +413,7 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+    //Represent the de-register for course button
     private class DeregisterFromCourseButton extends AbstractAction {
         DeregisterFromCourseButton() {
             super("Deregister from Course");
@@ -424,6 +436,7 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+    //Represent the check balance button
     private class CheckBalanceButton extends AbstractAction {
 
         CheckBalanceButton() {
@@ -440,6 +453,8 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+
+    //Represent the pay Student fees button
     private class PayStudentFeesButton extends AbstractAction {
         PayStudentFeesButton() {
             super("Pay Student Fees");
@@ -463,6 +478,7 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+    //Represent the Deposit button
     private class DepositButton extends AbstractAction {
         DepositButton() {
             super("Deposit to account");
@@ -496,6 +512,8 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+
+    //Represent the view maintenance requests button
     private class ViewMaintenanceRequestsButton extends AbstractAction {
         ViewMaintenanceRequestsButton() {
             super("Maintenance Requests");
@@ -519,30 +537,26 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+
+
+    //Represent submit a request button
     private class SubmitMaintenanceRequestButton extends AbstractAction {
         SubmitMaintenanceRequestButton() {
             super("Submit Request");
         }
 
-        @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
         @Override
         public void actionPerformed(ActionEvent e) {
 
             JTextField requestTitle = new JTextField();
             JTextField requestProblem = new JTextField();
-
-            Object[] fields = {
-                    "Give a title to your Maintenance Request ", requestTitle,
-                    "Describe the issue here ", requestProblem
-            };
+            Object[] fields = {"Request title ", requestTitle, "Describe the issue here ", requestProblem};
 
             int answer = JOptionPane.showConfirmDialog(null, fields, "Request Information",
                     JOptionPane.OK_CANCEL_OPTION);
-
             if (answer == JOptionPane.OK_OPTION) {
                 String requestTitleInput = requestTitle.getText();
                 String problemDescriptionInput = requestProblem.getText();
-
 
                 MaintenanceRequest newRequest = new MaintenanceRequest(requestTitleInput, problemDescriptionInput);
 
@@ -564,6 +578,8 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+
+    //Represent delete a request button
     private class DeleteMaintenanceRequestButton extends AbstractAction {
         DeleteMaintenanceRequestButton() {
             super("Delete Request");
@@ -590,6 +606,7 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+    //Represent Save Student Status Button
     private class SaveStudentRoomButton extends AbstractAction {
 
         SaveStudentRoomButton() {
@@ -612,6 +629,8 @@ public class DemoStudentServicesCentre extends JFrame {
         }
     }
 
+
+    //Represent load student status button
     private class LoadStudentRoomButton extends AbstractAction {
 
         LoadStudentRoomButton() {
@@ -629,6 +648,7 @@ public class DemoStudentServicesCentre extends JFrame {
     }
 
 
+    //Represent the quit website button
     private class QuitButton extends AbstractAction {
         QuitButton() {
             super("Quit");
