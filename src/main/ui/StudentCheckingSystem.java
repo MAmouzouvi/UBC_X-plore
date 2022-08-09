@@ -1,7 +1,7 @@
 package ui;
 
 import model.*;
-import model.Exceptions.NegativeAmountException;
+import model.exceptions.NegativeAmountException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 

@@ -1,7 +1,6 @@
 package model;
 
-import model.Exceptions.NegativeAmountException;
-import org.json.JSONObject;
+import model.exceptions.NegativeAmountException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

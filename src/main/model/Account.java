@@ -1,6 +1,6 @@
 package model;
 
-import model.Exceptions.NegativeAmountException;
+import model.exceptions.NegativeAmountException;
 import org.json.JSONObject;
 
 // represents a student financial account. Every amount is in $.

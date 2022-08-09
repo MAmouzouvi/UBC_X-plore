@@ -1,6 +1,6 @@
 package ui.gui;
 
-import model.Exceptions.NegativeAmountException;
+import model.exceptions.NegativeAmountException;
 
 public class MainRunner {
 

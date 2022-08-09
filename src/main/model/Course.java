@@ -1,12 +1,8 @@
 package model;
 
-import model.Exceptions.NegativeAmountException;
-import org.json.JSONArray;
+import model.exceptions.NegativeAmountException;
 import org.json.JSONObject;
 import persistence.Writable;
-
-import java.util.LinkedList;
-import java.util.List;
 
 //Represent a course with a name, a cost and a list of registered Students
 public class Course implements Writable {

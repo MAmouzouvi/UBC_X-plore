@@ -1,7 +1,7 @@
 package persistence;
 
 import model.*;
-import model.Exceptions.NegativeAmountException;
+import model.exceptions.NegativeAmountException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
