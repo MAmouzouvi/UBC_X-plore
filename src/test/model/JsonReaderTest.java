@@ -46,7 +46,7 @@ public class JsonReaderTest extends JsonTest{
             assertEquals("Statistics",courses.get(1).getCourseName());
 
 
-            assertEquals("maintenanceRequestRoom", student.getMaintenanceRequestRoom().getRequestRoomName());
+            assertEquals("maintenanceRequestRoom", student.getRequestRoom().getRequestRoomName());
             List<MaintenanceRequest> requests = student.getRequestRoom().getRequests();
             assertEquals(2, requests.size());
             assertEquals("kitchen issue",requests.get(0).getTitle());

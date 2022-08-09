@@ -39,7 +39,7 @@ public class JsonWriterTest extends JsonTest{
             student = reader.read();
             assertEquals("Makafui Amouzouvi", student.getStudentName());
             assertEquals("courseRoom",student.getCourseRoom().getCourseRoomName());
-            assertEquals("maintenanceRequestRoom",student.getMaintenanceRequestRoom().getRequestRoomName());
+            assertEquals("maintenanceRequestRoom",student.getRequestRoom().getRequestRoomName());
             assertEquals(0, student.getRequestRoom().getRequests().size());
             assertEquals(0, student.getStudentCourses().size());
         } catch (IOException e) {
@@ -66,7 +66,7 @@ public class JsonWriterTest extends JsonTest{
 
             assertEquals("Makafui Amouzouvi", student.getStudentName());
             assertEquals("courses",student.getCourseRoom().getCourseRoomName());
-            assertEquals("courses",student.getMaintenanceRequestRoom().getRequestRoomName());
+            assertEquals("courses",student.getRequestRoom().getRequestRoomName());
             assertEquals(1, student.getRequestRoom().getRequests().size());
             assertEquals(1, student.getStudentCourses().size());
 
