@@ -17,7 +17,7 @@ import java.util.List;
 //Represent a student services centre website
 public class DemoStudentServicesCentre extends JFrame {
     public static final int WIDTH = 800;
-    public static final int HEIGHT = 730;
+    public static final int HEIGHT = 800;
     private static final String JSON_STUDENT_ROOM = "./data/studentRoom.json";
     private final JPanel leftMenuPanel;
     private JsonReader jsonReader;
@@ -58,15 +58,10 @@ public class DemoStudentServicesCentre extends JFrame {
     public DemoStudentServicesCentre() throws NegativeAmountException {
         super("Student Services App");
         theStudent = new Student("Makafui Amouzouvi");
-
-        //insert icon which is student picture
-        JLabel picture = new JLabel();
-        picture.setSize(new Dimension(100,100));
-        ImageIcon img = new ImageIcon("/Users/makafuiamouzouvi/project_d0q3f_/src/main/ui/gui/student.jpg");
-        Image img1 = img.getImage();
-        Image imgScale = img1.getScaledInstance(picture.getWidth(),picture.getHeight(),Image.SCALE_SMOOTH);
-        ImageIcon scaledImage = new ImageIcon(imgScale);
-        picture.setIcon(scaledImage);
+        upLabel = new JLabel("Welcome " + theStudent.getStudentName());
+        upLabel.setBounds(400, 0, 200, 1000);
+        upLabel.setForeground(Color.WHITE);
+        upLabel.setFont(new Font("Times", Font.ITALIC, 28));
 
         //panel can be course room panel or maintenance requests room panel
         changingPanel = new JPanel();
@@ -74,7 +69,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
         //up panel
         JPanel upPanel = new JPanel();
-        initUpPanel(upPanel);
+        initUpPanel(upPanel,upLabel);
 
         //Main Panel
         mainPanel = new JPanel();
@@ -92,14 +87,22 @@ public class DemoStudentServicesCentre extends JFrame {
     //MODIFIES: this
     // EFFECTS: Help initialize the up Panel on the Frame (Frame with the student name
     //and image)
-    private void initUpPanel(JPanel upPanel) {
+    private void initUpPanel(JPanel upPanel, JLabel upLabel) {
+
+        //insert icon which is student picture
+        JLabel picture = new JLabel();
+        picture.setSize(new Dimension(100,100));
+        ImageIcon img = new ImageIcon("/Users/makafuiamouzouvi/project_d0q3f_/src/main/ui/gui/student.jpg");
+        Image img1 = img.getImage();
+        Image imgScale = img1.getScaledInstance(picture.getWidth(),picture.getHeight(),Image.SCALE_SMOOTH);
+        ImageIcon scaledImage = new ImageIcon(imgScale);
+        picture.setIcon(scaledImage);
+
         upPanel.setBounds(0, 0, 1500, 100);
-        upPanel.setBackground(Color.GRAY);
-        upLabel = new JLabel("Welcome " + theStudent.getStudentName());
-        upLabel.setBounds(400, 0, 200, 1000);
-        upLabel.setForeground(Color.BLACK);
-        upLabel.setFont(new Font("Times", Font.ITALIC, 28));
+        upPanel.setBackground(new Color(0,25,51));
         upPanel.setPreferredSize(new Dimension(WIDTH, 100));
+        upPanel.add(picture);
+        upPanel.add(upLabel);
         add(upPanel, BorderLayout.NORTH);
     }
 
@@ -222,7 +225,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
         panel.setBackground(Color.BLACK);
         add(panel, BorderLayout.WEST);
-        panel.setLayout(new FlowLayout(12, 10, 30));
+        panel.setLayout(new FlowLayout(12, 10, 27));
         panel.add(initButton(new JButton(new ViewCoursesButton())));
         panel.add(initButton(new JButton(new RegisterForCourseButton())));
         panel.add(initButton(new JButton(new DeregisterFromCourseButton())));
@@ -261,7 +264,7 @@ public class DemoStudentServicesCentre extends JFrame {
         } else {
 
             defaultTable.setRowCount(0);
-            for (Course course : courses) {
+            for (Course course : theStudent.getStudentCourses()) {
                 Object[] obj = {course.getCourseName(),
                         course.getCourseCost()};
                 defaultTable.addRow(obj);
@@ -280,7 +283,7 @@ public class DemoStudentServicesCentre extends JFrame {
             JOptionPane.showMessageDialog(parent, "No request has been submitted yet !");
         } else {
             defaultTable.setRowCount(0);
-            for (MaintenanceRequest request : requests) {
+            for (MaintenanceRequest request : theStudent.getRequestRoom().getRequests()) {
                 Object[] obj = {request.getTitle(),
                         request.getProblem()};
                 defaultTable.addRow(obj);
@@ -319,7 +322,7 @@ public class DemoStudentServicesCentre extends JFrame {
         selectionBox = new JComboBox();
         MaintenanceRequest[] comboBoxData = new MaintenanceRequest[requests.size()];
 
-        for (MaintenanceRequest request : requests) {
+        for (MaintenanceRequest request : theStudent.getRequestRoom().getRequests()) {
             selectionBox.addItem(request.getTitle());
         }
 
@@ -328,7 +331,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
         if (index == JOptionPane.OK_OPTION) {
             int selectedIndex = selectionBox.getSelectedIndex();
-            return requests.get(selectedIndex);
+            return theStudent.getRequestRoom().getRequests().get(selectedIndex);
         }
         return null;
     }
@@ -394,12 +397,11 @@ public class DemoStudentServicesCentre extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Course selectedCourse = selectCourse();
-            balance = theStudent.getAccountBalance();
             if (!(selectedCourse == null)) {
-                if (courses.contains(selectedCourse)) {
+                if (theStudent.getStudentCourses().contains(selectedCourse)) {
                     JFrame popUpMessage = new JFrame();
                     JOptionPane.showMessageDialog(popUpMessage, "You are already registered in this course !");
-                } else if (balance < selectedCourse.getCourseCost()) {
+                } else if (theStudent.getAccountBalance() < selectedCourse.getCourseCost()) {
                     JFrame popUpMessage = new JFrame();
                     JOptionPane.showMessageDialog(popUpMessage,
                             "Insufficient Balance, Please Recharge your account !");
@@ -424,7 +426,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
             Course selectedCourse = selectCourse();
             if (!(selectedCourse == null)) {
-                if (!courses.contains(selectedCourse)) {
+                if (!theStudent.getStudentCourses().contains(selectedCourse)) {
                     JFrame popUpMessage = new JFrame();
                     JOptionPane.showMessageDialog(popUpMessage, "You are not registered in this Course !");
                 } else {
@@ -445,10 +447,9 @@ public class DemoStudentServicesCentre extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            balance = theStudent.getAccountBalance();
             JFrame popUpMessage = new JFrame();
             JOptionPane.showMessageDialog(popUpMessage, "Your account Balance is "
-                    + balance + " $");
+                    + theStudent.getAccountBalance() + " $");
 
         }
     }
@@ -560,8 +561,8 @@ public class DemoStudentServicesCentre extends JFrame {
 
                 MaintenanceRequest newRequest = new MaintenanceRequest(requestTitleInput, problemDescriptionInput);
 
-                if (!requests.contains(newRequest)) {
-                    requests.add(newRequest);
+                if (!theStudent.getRequestRoom().getRequests().contains(newRequest)) {
+                    theStudent.getRequestRoom().getRequests().add(newRequest);
                     changingPanel.removeAll();
                     initMaintenanceRequestsRoom(changingPanel);
                     repaint();
