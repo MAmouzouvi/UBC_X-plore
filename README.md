@@ -42,3 +42,10 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 - As a user, I want to be able to save my Student Services Account Status to a file
 - As a user, I want to be able to load my Student Services Account Status from a file
 
+##Instructions for Grader
+- You can generate the first required event by clicking on Submit Request/ Delete Request
+- You can generate the second required event by clicking Maintenance requests to see all the submitted requests
+- You can locate my visual component by running the app. It represents a picture of a student
+- You can save the state of my application by clicking on save student status
+- You can reload the state of my application by load student status
+
