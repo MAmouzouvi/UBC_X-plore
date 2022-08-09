@@ -128,7 +128,6 @@ public class DemoStudentServicesCentre extends JFrame {
     }
 
 
-
     private void initStudentCourseRoomPanel(JPanel panel) {
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         panel.setBackground(new Color(51, 0, 102));
@@ -138,7 +137,7 @@ public class DemoStudentServicesCentre extends JFrame {
         coursesTable.setRowHeight(40);
         defaultTable = new DefaultTableModel(header, 0);
         coursesTable.setModel(defaultTable);
-        coursesTable.setFont(new Font("Times",Font.BOLD,15));
+        coursesTable.setFont(new Font("Times", Font.BOLD, 15));
         coursesTable.setForeground(Color.WHITE);
         coursesTable.setBackground(new Color(51, 0, 102));
         coursesTable.getTableHeader().setOpaque(false);
@@ -165,7 +164,7 @@ public class DemoStudentServicesCentre extends JFrame {
         coursesTable.setModel(defaultTable);
         coursesTable.getTableHeader().setOpaque(false);
         coursesTable.setOpaque(false);
-        coursesTable.setFont(new Font("Times",Font.BOLD,15));
+        coursesTable.setFont(new Font("Times", Font.BOLD, 15));
         coursesTable.setForeground(Color.WHITE);
         coursesTable.setBackground(new Color(51, 0, 102));
         JScrollPane pane = new JScrollPane(coursesTable);
@@ -282,6 +281,24 @@ public class DemoStudentServicesCentre extends JFrame {
 
     }
 
+    private MaintenanceRequest selectRequest() {
+        selectionBox = new JComboBox();
+        MaintenanceRequest[] comboBoxData = new MaintenanceRequest[requests.size()];
+
+        for (MaintenanceRequest request : requests) {
+            selectionBox.addItem(request.getTitle());
+        }
+
+        int index = JOptionPane.showConfirmDialog(null, selectionBox,
+                "Select Course", JOptionPane.OK_CANCEL_OPTION);
+
+        if (index == JOptionPane.OK_OPTION) {
+            int selectedIndex = selectionBox.getSelectedIndex();
+            return requests.get(selectedIndex);
+        }
+        return null;
+    }
+
     private void saveStudentCheckingSystemStatus() {
         try {
             jsonWriter.open();
@@ -299,12 +316,11 @@ public class DemoStudentServicesCentre extends JFrame {
         try {
             theStudent = jsonReader.read();
             System.out.println("Loaded " + theStudent.getStudentName() + " from " + JSON_STUDENT_ROOM);
-            JFrame parent = new JFrame();
-            JOptionPane.showMessageDialog(parent, "Student Status was successfully loaded!");
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STUDENT_ROOM);
         }
     }
+
 
     private class ViewCoursesButton extends AbstractAction {
 
@@ -525,6 +541,21 @@ public class DemoStudentServicesCentre extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (requests.size() == 0) {
+                JFrame popUpMessage = new JFrame();
+                JOptionPane.showMessageDialog(popUpMessage, "There is no submitted request yet!");
+            } else {
+                MaintenanceRequest selectedRequest = selectRequest();
+                if (!(selectedRequest == null)) {
+                    theStudent.getRequestRoom().deleteRequest(selectedRequest);
+                    changingPanel.removeAll();
+                    initMaintenanceRequestsRoom(changingPanel);
+                    repaint();
+                    revalidate();
+                    setVisible(true);
+                    updateMaintenanceRequestRoom();
+                }
+            }
 
         }
     }
@@ -537,7 +568,6 @@ public class DemoStudentServicesCentre extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
             if (theStudent.getStudentCourses().size() == 0) {
                 JFrame parent = new JFrame();
                 JOptionPane.showMessageDialog(parent,
@@ -562,9 +592,12 @@ public class DemoStudentServicesCentre extends JFrame {
         public void actionPerformed(ActionEvent e) {
             loadStudentCheckingSystemStatus();
             updateCoursesRoom();
+            updateCoursesRoom();
+            JFrame parent = new JFrame();
+            JOptionPane.showMessageDialog(parent, "Student Status was successfully loaded!");
+
         }
     }
-
 
 
     private class QuitButton extends AbstractAction {
@@ -574,7 +607,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            setVisible(false);
         }
     }
 
