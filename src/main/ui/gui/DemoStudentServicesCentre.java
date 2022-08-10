@@ -173,6 +173,7 @@ public class DemoStudentServicesCentre extends JFrame {
         panel.setBackground(new Color(51, 0, 102));
         panel.setLayout(new BorderLayout());
         String[] header = new String[]{"Course", "Price"};
+
         coursesTable = new JTable();
         coursesTable.setRowHeight(40);
         defaultTable = new DefaultTableModel(header, 0);
