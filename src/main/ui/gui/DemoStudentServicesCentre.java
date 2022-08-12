@@ -1,6 +1,7 @@
 package ui.gui;
 
 import model.*;
+import model.exceptions.LogException;
 import model.exceptions.NegativeAmountException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -589,6 +590,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             if (requests.size() == 0) {
                 JFrame popUpMessage = new JFrame();
                 JOptionPane.showMessageDialog(popUpMessage, "There is no submitted request yet!");
@@ -659,6 +661,16 @@ public class DemoStudentServicesCentre extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
+
+            LogPrinter lp;
+            try {
+                lp = new ConsolePrinter();
+                lp.printLog(EventLog.getInstance());
+            } catch (LogException ae) {
+                ae.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         }
     }
 

@@ -6,12 +6,16 @@
                 "cost": 5000
             },
             {
+                "courseName": "Mathematics",
+                "cost": 6000
+            },
+            {
                 "courseName": "Physics",
                 "cost": 2000
             },
             {
-                "courseName": "Mathematics",
-                "cost": 6000
+                "courseName": "English",
+                "cost": 4000
             }
         ],
         "courseRoomName": "courseRoom"
@@ -24,11 +28,19 @@
                 "title": "Kitchen issue"
             },
             {
-                "problem": "Tub is broken",
+                "problem": "Sink is broken",
                 "title": "Bathroom issue"
+            },
+            {
+                "problem": "dirty couch",
+                "title": "Living room issue"
+            },
+            {
+                "problem": "bedframe is broken",
+                "title": "room issue"
             }
         ]
     },
     "name": "Makafui Amouzouvi",
-    "account": {"balance": 4500}
+    "account": {"balance": 33000}
 }

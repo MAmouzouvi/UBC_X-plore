@@ -28,6 +28,8 @@ public class CourseRoom implements Writable {
     public boolean addCourse(Course course) {
         if (!courses.contains(course)) {
             courses.add(course);
+            EventLog.getInstance().logEvent(new Event("A course was added to the course room "
+                    + courseRoomName));
             return true;
         } else {
             return false;
@@ -42,6 +44,8 @@ public class CourseRoom implements Writable {
     public boolean removeCourse(Course course) {
         if (courses.contains(course)) {
             courses.remove(course);
+            EventLog.getInstance().logEvent(new Event("A course was removed to the course room "
+                    + courseRoomName));
             return true;
         } else {
             return false;

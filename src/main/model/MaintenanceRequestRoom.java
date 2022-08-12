@@ -26,6 +26,8 @@ public class MaintenanceRequestRoom implements Writable {
     public boolean submitRequest(MaintenanceRequest request) {
         if (!requests.contains(request)) {
             requests.add(request);
+            EventLog.getInstance().logEvent(new Event("A maintenance request was submitted to the "
+                    + requestListName));
             return true;
         } else {
             System.out.println("This request already exists !");
@@ -41,6 +43,8 @@ public class MaintenanceRequestRoom implements Writable {
         if (requests.contains(request)) {
             requests.remove(request);
             System.out.println("The request has been removed!");
+            EventLog.getInstance().logEvent(new Event("A maintenance request was deleted from the "
+                    + requestListName));
             return true;
         } else {
             System.out.println("Request not found!");
@@ -55,7 +59,7 @@ public class MaintenanceRequestRoom implements Writable {
     }
 
 
-    //EFFECTS: returns the Maintenance Requets room name
+    //EFFECTS: returns the Maintenance Requests room name
     public String getRequestRoomName() {
         return this.requestListName;
     }

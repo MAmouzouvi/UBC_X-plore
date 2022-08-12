@@ -19,7 +19,7 @@ public class Student implements Writable {
     // and an empty list of registered courses
     public Student(String name) {
         this.name = name;
-        this.courseRoom = new CourseRoom("courseRoom");
+        this.courseRoom = new CourseRoom("student's course room");
         this.account = new Account();
         this.maintenanceRequestRoom = new MaintenanceRequestRoom("maintenanceRequestRoom");
 

@@ -49,3 +49,31 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 - You can save the state of my application by clicking on save student status
 - You can reload the state of my application by load student status
 
+## Phase 4
+Loaded Makafui Amouzouvi from ./data/studentRoom.json
+Thu Aug 11 18:20:09 PDT 2022
+A course was added to the course room offered Courses
+Thu Aug 11 18:20:09 PDT 2022
+A course was added to the course room offered Courses
+Thu Aug 11 18:20:09 PDT 2022
+A course was added to the course room offered Courses
+Thu Aug 11 18:20:09 PDT 2022
+A course was added to the course room offered Courses
+Thu Aug 11 18:20:09 PDT 2022
+A course was added to the course room offered Courses
+Thu Aug 11 18:20:15 PDT 2022
+A course was added to the course room student's course room
+Thu Aug 11 18:20:15 PDT 2022
+A course was added to the course room student's course room
+Thu Aug 11 18:20:15 PDT 2022
+A course was added to the course room student's course room
+Thu Aug 11 18:20:15 PDT 2022
+A course was added to the course room student's course room
+Thu Aug 11 18:20:15 PDT 2022
+A maintenance request was submitted to the maintenanceRequestRoom
+Thu Aug 11 18:20:15 PDT 2022
+A maintenance request was submitted to the maintenanceRequestRoom
+Thu Aug 11 18:20:15 PDT 2022
+A maintenance request was submitted to the maintenanceRequestRoom
+Thu Aug 11 18:20:15 PDT 2022
+A maintenance request was submitted to the maintenanceRequestRoom
