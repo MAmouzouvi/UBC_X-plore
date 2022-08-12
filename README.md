@@ -51,29 +51,48 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 
 ## Phase 4
 Loaded Makafui Amouzouvi from ./data/studentRoom.json
+
 Thu Aug 11 18:20:09 PDT 2022
 A course was added to the course room offered Courses
+
 Thu Aug 11 18:20:09 PDT 2022
 A course was added to the course room offered Courses
+
 Thu Aug 11 18:20:09 PDT 2022
 A course was added to the course room offered Courses
+
 Thu Aug 11 18:20:09 PDT 2022
 A course was added to the course room offered Courses
+
 Thu Aug 11 18:20:09 PDT 2022
 A course was added to the course room offered Courses
+
 Thu Aug 11 18:20:15 PDT 2022
 A course was added to the course room student's course room
+
 Thu Aug 11 18:20:15 PDT 2022
 A course was added to the course room student's course room
+
 Thu Aug 11 18:20:15 PDT 2022
 A course was added to the course room student's course room
+
 Thu Aug 11 18:20:15 PDT 2022
 A course was added to the course room student's course room
+
 Thu Aug 11 18:20:15 PDT 2022
 A maintenance request was submitted to the maintenanceRequestRoom
+
 Thu Aug 11 18:20:15 PDT 2022
 A maintenance request was submitted to the maintenanceRequestRoom
+
 Thu Aug 11 18:20:15 PDT 2022
 A maintenance request was submitted to the maintenanceRequestRoom
+
 Thu Aug 11 18:20:15 PDT 2022
 A maintenance request was submitted to the maintenanceRequestRoom
+
+
+## Reflections
+
+My UML has so many associations so if I had time, I would have created 
+an Interface or abstract class and refactor similar behaviors together

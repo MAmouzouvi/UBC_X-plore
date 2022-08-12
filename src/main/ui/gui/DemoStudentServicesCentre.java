@@ -32,7 +32,6 @@ public class DemoStudentServicesCentre extends JFrame {
     protected Student theStudent;
     private int balance;
     private CourseRoom offeredCourses;
-    private List<MaintenanceRequest> requests;
 
     //offered Courses
     private Course compScience;
@@ -53,7 +52,7 @@ public class DemoStudentServicesCentre extends JFrame {
     private DefaultTableModel defaultTable;
     private JTextField depositAmountField;
     private JComboBox selectionBox;
-    private List<Course> courses;
+
 
     //EFFECTS: create an instance of this website
     public DemoStudentServicesCentre() throws NegativeAmountException {
@@ -124,7 +123,6 @@ public class DemoStudentServicesCentre extends JFrame {
     // EFFECTS: Help initialise the student fields and courses
     private void initFields() throws NegativeAmountException {
 
-        requests = theStudent.getRequestRoom().getRequests();
         balance = theStudent.getAccountBalance();
 
 
@@ -144,7 +142,6 @@ public class DemoStudentServicesCentre extends JFrame {
 
 
         paidFees = new LinkedList<>();
-        courses = theStudent.getStudentCourses();
 
         depositAmountField = new JTextField();
 
@@ -322,7 +319,7 @@ public class DemoStudentServicesCentre extends JFrame {
 
     private MaintenanceRequest selectRequest() {
         selectionBox = new JComboBox();
-        MaintenanceRequest[] comboBoxData = new MaintenanceRequest[requests.size()];
+        MaintenanceRequest[] comboBoxData = new MaintenanceRequest[theStudent.getRequestRoom().getRequests().size()];
 
         for (MaintenanceRequest request : theStudent.getRequestRoom().getRequests()) {
             selectionBox.addItem(request.getTitle());
@@ -591,7 +588,7 @@ public class DemoStudentServicesCentre extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (requests.size() == 0) {
+            if (theStudent.getRequestRoom().getRequests().size() == 0) {
                 JFrame popUpMessage = new JFrame();
                 JOptionPane.showMessageDialog(popUpMessage, "There is no submitted request yet!");
             } else {
