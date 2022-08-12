@@ -52,4 +52,10 @@ public class EventLogTest {
         assertEquals("Event log cleared.", itr.next().getDescription());
         assertFalse(itr.hasNext());
     }
+
+    @Test
+    public void testIterator(){
+        EventLog el = EventLog.getInstance();
+       // assertEquals("",el);
+    }
 }
