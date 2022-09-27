@@ -10,6 +10,7 @@ import model.Event;
  */
 public class ConsolePrinter  implements LogPrinter {
 
+
     /**
      * Constructs an instance of the console printer
      */

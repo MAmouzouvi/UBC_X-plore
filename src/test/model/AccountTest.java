@@ -42,6 +42,7 @@ public class AccountTest {
         assertEquals(35000,testAccount.getBalance());
     }
 
+
     @Test
     public void testPayFeesInsufficientAmount(){
         assertFalse(testAccount.payFee(20001));

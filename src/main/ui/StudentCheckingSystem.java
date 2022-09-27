@@ -117,6 +117,7 @@ public class StudentCheckingSystem {
         System.out.println("\tquit -> quit");
     }
 
+
     //MODIFIES: this
     //EFFECTS: processes commands from user
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})

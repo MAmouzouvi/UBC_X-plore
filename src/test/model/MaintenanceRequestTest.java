@@ -22,6 +22,7 @@ public class MaintenanceRequestTest {
         assertEquals("Dishwasher stopped working",testMaintenanceRequest.getProblem());
     }
 
+
     @Test
     public void testGetTitle(){
         assertEquals("Kitchen Maintenance",testMaintenanceRequest.getTitle());

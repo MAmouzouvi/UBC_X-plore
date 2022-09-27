@@ -10,6 +10,7 @@ import model.EventLog;
 
 import model.exceptions.LogException;
 
+
 /**
  * Represents a file printer for printing the log to file.
  */

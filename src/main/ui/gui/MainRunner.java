@@ -2,7 +2,9 @@ package ui.gui;
 
 import model.exceptions.NegativeAmountException;
 
+
 public class MainRunner {
+    private int age;
 
     //Run the App
     public static void main(String[] args) {
@@ -12,4 +14,5 @@ public class MainRunner {
             //fail
         }
     }
+
 }

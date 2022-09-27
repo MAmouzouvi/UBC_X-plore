@@ -23,6 +23,7 @@ public class Student implements Writable {
         this.account = new Account();
         this.maintenanceRequestRoom = new MaintenanceRequestRoom("maintenanceRequestRoom");
 
+
     }
 
     //MODIFIES: this

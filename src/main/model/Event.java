@@ -22,6 +22,7 @@ public class Event {
         this.description = description;
     }
 
+
     /**
      * Gets the date of this event (includes time).
      * @return  the date of the event

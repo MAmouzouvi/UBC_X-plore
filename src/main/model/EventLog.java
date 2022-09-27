@@ -50,6 +50,7 @@ public class EventLog implements Iterable<Event> {
         events.add(e);
     }
 
+
     /**
      * Clears the event log and logs the event.
      */

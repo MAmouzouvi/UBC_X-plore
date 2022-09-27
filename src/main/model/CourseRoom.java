@@ -36,6 +36,8 @@ public class CourseRoom implements Writable {
         }
     }
 
+
+
     //MODIFIES : this.
     //EFFECTS: if the course is not on the list ,
     // return false

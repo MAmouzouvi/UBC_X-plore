@@ -88,6 +88,7 @@ public class MaintenanceRequestRoomTest {
 
     }
 
+
     @Test
     public void testGetRequestRoomName(){
         assertEquals("Test Room",testMaintenanceRequestRoom.getRequestRoomName());

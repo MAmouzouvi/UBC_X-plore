@@ -3,6 +3,7 @@ package model;
 import model.exceptions.NegativeAmountException;
 import org.json.JSONObject;
 
+
 // represents a student financial account. Every amount is in $.
 public class Account {
     protected int balance;

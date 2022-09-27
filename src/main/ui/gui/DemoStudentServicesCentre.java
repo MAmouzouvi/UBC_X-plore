@@ -1,5 +1,6 @@
 package ui.gui;
 
+
 import model.*;
 import model.exceptions.LogException;
 import model.exceptions.NegativeAmountException;

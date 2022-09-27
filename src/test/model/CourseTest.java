@@ -13,6 +13,7 @@ public class CourseTest {
     private Student testStudent3;
     private Student testStudent4;
 
+
     @BeforeEach
     public void setUp(){
         try {

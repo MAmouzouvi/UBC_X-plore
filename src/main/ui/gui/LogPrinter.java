@@ -5,6 +5,7 @@ import model.EventLog;
 import model.exceptions.LogException;
 
 
+
 /**
  * Defines behaviours that event log printers must support.
  */

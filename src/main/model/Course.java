@@ -4,6 +4,10 @@ import model.exceptions.NegativeAmountException;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
+
+
 //Represent a course with a name, a cost and a list of registered Students
 public class Course implements Writable {
     private String courseName;
@@ -19,6 +23,19 @@ public class Course implements Writable {
         this.courseName = name;
         this.cost = cost;
         // this.students = new LinkedList<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Course)) return false;
+        Course course = (Course) o;
+        return Objects.equals(getCourseName(), course.getCourseName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCourseName());
     }
 
 /*

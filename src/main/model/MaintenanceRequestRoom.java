@@ -65,6 +65,7 @@ public class MaintenanceRequestRoom implements Writable {
     }
 
 
+
     @Override
     //EFFECTS: write maintenance request room as a JSON objects
     public JSONObject toJson() {

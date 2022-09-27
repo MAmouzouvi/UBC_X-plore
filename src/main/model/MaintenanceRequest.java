@@ -19,6 +19,7 @@ public class MaintenanceRequest implements Writable {
     }
 
 
+
     //EFFECTS: returns the title of the Maintenance
     // request object
     public String getTitle() {

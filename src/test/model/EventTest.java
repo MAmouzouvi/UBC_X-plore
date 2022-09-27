@@ -41,6 +41,7 @@ public class EventTest {
         assertEquals(d.toString() + "\n" + "Sensor open at door", e.toString());
     }
 
+
     @Test
     public void testHashCode(){
         assertEquals(1182780560,e.hashCode());
