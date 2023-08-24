@@ -16,9 +16,13 @@
             {
                 "courseName": "English",
                 "cost": 4000
+            },
+            {
+                "courseName": "Statistics",
+                "cost": 7000
             }
         ],
-        "courseRoomName": "courseRoom"
+        "courseRoomName": "student's course room"
     },
     "maintenanceRequestRoom": {
         "requestListName": "maintenanceRequestRoom",
@@ -42,5 +46,5 @@
         ]
     },
     "name": "Makafui Amouzouvi",
-    "account": {"balance": 33000}
+    "account": {"balance": 26000}
 }
