@@ -56,7 +56,8 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 
 ## Phase 4
 
-Website Activity Records
+## *Website Activity Records* ##
+
 Loaded Makafui Amouzouvi from ./data/studentRoom.json
 
 Thu Aug 11 18:20:09 PDT 2022
