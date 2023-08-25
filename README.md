@@ -33,7 +33,7 @@ for the project during the summer, I decided to go with a much more adequate pro
 project is now about a Student online Checking System where the student can register for classes and pay some fees. 
 I intend to improve on it (on my personal time) and expand it eventually to a Course Schedule generator software.
 
-##User Stories
+## User Stories
 
 - As a user, I want to be able to view my list of registered classes
 - As a user, I want to be able to register for a course
@@ -47,7 +47,7 @@ I intend to improve on it (on my personal time) and expand it eventually to a Co
 - As a user, I want to be able to save my Student Services Account Status to a file
 - As a user, I want to be able to load my Student Services Account Status from a file
 
-##Instructions for Grader
+## Instructions for Grader
 - You can generate the first required event by clicking on Submit Request/ Delete Request
 - You can generate the second required event by clicking Maintenance Requests to see all the submitted requests
 - You can locate my visual component by running the app. It represents a picture of a student
@@ -103,4 +103,4 @@ A maintenance request was submitted to the maintenanceRequestRoom
 ## Reflections
 
 My UML has so many associations so if I had time, I would have created 
-an Interface or abstract class and refactor similar behaviors together
+an Interface or abstract class and refactor similar behaviours together
