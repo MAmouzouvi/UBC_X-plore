@@ -1,6 +1,7 @@
 
 
-## Mini Student Services Centre
+## UBC X-plore
+ inspired by the UBC Student Services platform, provides a simulated experience of the UBC Student Services Centre to non-ubc students.
 
 ## How to run
 - Download the zip file, unzip and open it with IntelliJ IDEA or any Java-incorporated IDE
